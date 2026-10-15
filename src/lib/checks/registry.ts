@@ -46,6 +46,20 @@ export const checkRegistry = {
   "accessibility.button-name.missing": { category: "accessibility", severity: "warning" },
   "accessibility.lang.missing": { category: "accessibility", severity: "warning" },
 
+  // Performance (from PageSpeed Insights, mapped in Phase 4). Several PSI audits share one id.
+  "performance.lcp.slow": { category: "performance", severity: "warning" },
+  "performance.cls.high": { category: "performance", severity: "warning" },
+  "performance.interactivity.slow": { category: "performance", severity: "warning" },
+  "performance.first-paint.slow": { category: "performance", severity: "info" },
+  "performance.server.slow": { category: "performance", severity: "warning" },
+  "performance.images.unoptimized": { category: "performance", severity: "warning" },
+  "performance.render-blocking": { category: "performance", severity: "info" },
+  "performance.unused-code": { category: "performance", severity: "info" },
+  "performance.text-compression": { category: "performance", severity: "info" },
+  "performance.caching": { category: "performance", severity: "info" },
+  // Fallback for PSI audits we haven't mapped; also the KB fallback for unknown ids.
+  "performance.other": { category: "performance", severity: "info" },
+
   // Local business (opt-in)
   "local.schema.missing": { category: "seo", severity: "warning", local: true },
   "local.phone.missing": { category: "seo", severity: "warning", local: true },

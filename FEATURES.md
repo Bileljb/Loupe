@@ -58,18 +58,19 @@ Status: ✅ done · ⏳ waiting on you (account or manual task) · ⬜ not start
 | Evidence on every failed issue, shortened to keep reports small | ✅ |
 | Test fixtures per check, per platform, and for local-business pass/fail | ✅ |
 
-## Phase 3: Knowledge base (the report's words)
+## Phase 3: Knowledge base (the report's words) ✅
 
 | Feature | Status |
 |---|---|
-| One entry per check: title, what, why it matters, business impact, how to fix, effort, impact, optional code snippet | ⬜ |
-| Plain language for owners; technical detail only in snippets and evidence | ⬜ |
-| Step-by-step fixes per platform for the highest-impact issues (title, meta description, alt text, slow images, HTTPS, sitemap) | ⬜ |
-| Generic fix always available when the platform is unknown | ⬜ |
-| Fallback entry for unknown PageSpeed findings | ⬜ |
-| English, French and Arabic versions | ⬜ |
-| Tests: every check has an entry in every language; banned-jargon test per language; platform fixes never replace the generic fix | ⬜ |
+| One entry per check (46): title, what, why it matters, business impact, how to fix, effort, impact, optional code snippet | ✅ |
+| Plain language for owners; technical detail only in snippets and evidence | ✅ |
+| Step-by-step fixes per platform for the highest-impact issues (title, search-result summary, alt text, slow images, HTTPS, sitemap) | ✅ |
+| Generic fix always available when the platform is unknown | ✅ |
+| Fallback entry for unknown PageSpeed findings | ✅ |
+| English, French and Arabic versions (Western digits in Arabic) | ✅ |
+| Tests: every check has an entry in every language; banned-jargon test per language; platform fixes never replace the generic fix | ✅ |
 | French and Arabic reviewed by a fluent speaker | ⏳ |
+| Platform menu paths checked against the live platforms | ⏳ |
 
 ## Phase 4: PageSpeed Insights (speed test)
 

@@ -3,7 +3,10 @@ import { issueSchema } from "@/lib/schemas";
 import { checkIds, checkRegistry, runHtmlChecks } from "./index";
 import { snapshot, fixture, failedIds } from "./testUtils";
 
-const nonLocalIds = checkIds.filter((id) => !("local" in checkRegistry[id]));
+// HTML checks only: performance ids come from PageSpeed Insights.
+const nonLocalIds = checkIds.filter(
+  (id) => !("local" in checkRegistry[id]) && checkRegistry[id].category !== "performance",
+);
 const localIds = checkIds.filter((id) => "local" in checkRegistry[id]);
 
 describe("runHtmlChecks on a healthy page", () => {

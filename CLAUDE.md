@@ -285,18 +285,21 @@ Note: `lang` and image alt text are single checks filed under accessibility (not
 
 ## Phase 3: Knowledge base
 
-- [ ] `kb/issues.ts` typed against the check ids
-- [ ] For every check id: `title`, `what`, `why`, `fix`, `effort`, `impact`, optional `snippet`
-- [ ] Plain-language tone (no jargon in `what`/`why`; technical detail only in `snippet`)
-- [ ] Test: every check id has a KB entry (fails the build if one is missing)
-- [ ] Jargon test: banned-terms list must not appear in Layer 1 fields (`title`, `what`, `why`, `businessImpact`, `fix`)
-- [ ] Write the English KB first, then French and Arabic versions (`kb/fr.ts`, `kb/ar.ts`) typed against the same check ids
-- [ ] Test: every locale has an entry for every check id; jargon test runs for each locale
+- [x] `kb/issues.ts` typed against the check ids
+- [x] For every check id: `title`, `what`, `why`, `fix`, `effort`, `impact`, optional `snippet`
+- [x] Plain-language tone (no jargon in `what`/`why`; technical detail only in `snippet`)
+- [x] Test: every check id has a KB entry (fails the build if one is missing)
+- [x] Jargon test: banned-terms list must not appear in Layer 1 fields (`title`, `what`, `why`, `businessImpact`, `fix`)
+- [x] Write the English KB first, then French and Arabic versions (`kb/fr.ts`, `kb/ar.ts`) typed against the same check ids
+- [x] Test: every locale has an entry for every check id; jargon test runs for each locale
 - [ ] Have French and Arabic copy reviewed by a fluent speaker
-- [ ] Fallback entry for unknown PSI audit ids
-- [ ] `businessImpact` written for every entry (consequence for the business, not a metric)
-- [ ] `platformFixes` for the highest-impact issues (title, meta description, image alt text, slow images, HTTPS, sitemap) on WordPress, Wix, Shopify, Squarespace, Webflow
-- [ ] Test: platform fix text never replaces the generic `fix` (fallback must always work)
+- [ ] Verify every `platformFixes` menu path against the live platforms (they change often)
+- [x] Fallback entry for unknown PSI audit ids
+- [x] `businessImpact` written for every entry (consequence for the business, not a metric)
+- [x] `platformFixes` for the highest-impact issues (title, meta description, image alt text, slow images, HTTPS, sitemap) on WordPress, Wix, Shopify, Squarespace, Webflow
+- [x] Test: platform fix text never replaces the generic `fix` (fallback must always work)
+
+Note: there is no single `kb/issues.ts`. Translated text lives in `kb/en.ts`, `kb/fr.ts`, `kb/ar.ts`; language-neutral `effort`, `impact` and `snippet` live once in `kb/shared.ts`; `getKbEntry(locale, id, platform)` in `kb/index.ts` merges them. Performance ids were added to the check registry in this phase so the KB could cover them; `performance.other` is the fallback. The jargon test does not cover `platformFixes`, which must quote real menu labels. Wherever this file says `kb/issues.ts`, read it as these files.
 
 **Done when:** the "every id has an entry" test passes.
 
