@@ -13,5 +13,14 @@
   },
   "LocaleSwitcher": {
     "label": "Langue"
+  },
+  "Errors": {
+    "INVALID_URL": "Cela ne ressemble pas à une adresse de site web. Essayez par exemple exemple.com.",
+    "BLOCKED": "Nous ne pouvons pas vérifier cette adresse. Seuls les sites web publics peuvent être vérifiés.",
+    "TIMEOUT": "Le site a mis trop de temps à répondre. Réessayez dans un instant.",
+    "NOT_HTML": "Cette adresse ne mène pas à une page web. Saisissez l'adresse de votre page d'accueil.",
+    "TOO_LARGE": "Cette page est trop volumineuse pour être vérifiée.",
+    "UNREACHABLE": "Nous n'avons pas pu joindre ce site. Vérifiez l'adresse et que le site est bien en ligne.",
+    "TOO_MANY_REDIRECTS": "Cette adresse renvoie les visiteurs vers trop d'autres adresses. Vérifiez qu'elle mène bien à votre page d'accueil."
   }
 }

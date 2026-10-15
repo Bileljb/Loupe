@@ -13,5 +13,14 @@
   },
   "LocaleSwitcher": {
     "label": "Language"
+  },
+  "Errors": {
+    "INVALID_URL": "That doesn't look like a website address. Try something like example.com.",
+    "BLOCKED": "We can't check this address. Only public websites can be checked.",
+    "TIMEOUT": "The website took too long to answer. Please try again in a moment.",
+    "NOT_HTML": "This address doesn't lead to a web page. Enter the address of your homepage.",
+    "TOO_LARGE": "This page is too big for us to check.",
+    "UNREACHABLE": "We couldn't reach this website. Check the address and make sure the site is online.",
+    "TOO_MANY_REDIRECTS": "This address sends visitors through too many other addresses. Check that it leads to your homepage."
   }
 }

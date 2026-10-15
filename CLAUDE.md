@@ -258,11 +258,11 @@ Server-side fetching of user-supplied URLs is an SSRF risk.
 
 ## Phase 1: Input validation and safe fetching
 
-- [ ] Zod schema for URL input; normalize (add `https://` if missing, strip fragment, lowercase host)
-- [ ] `ssrf.ts`: scheme check, DNS resolution, private/reserved IP blocklist (IPv4 + IPv6)
-- [ ] `safeFetch.ts`: timeout, size cap, manual redirects with re-validation, max hops
-- [ ] Unit tests: localhost, `127.0.0.1`, `10.x`, `169.254.169.254`, IPv6 loopback, `file://`, redirect to a private IP, credentials in URL
-- [ ] Friendly error messages for each failure type (invalid URL, blocked, timeout, not HTML, too large)
+- [x] Zod schema for URL input; normalize (add `https://` if missing, strip fragment, lowercase host)
+- [x] `ssrf.ts`: scheme check, DNS resolution, private/reserved IP blocklist (IPv4 + IPv6)
+- [x] `safeFetch.ts`: timeout, size cap, manual redirects with re-validation, max hops
+- [x] Unit tests: localhost, `127.0.0.1`, `10.x`, `169.254.169.254`, IPv6 loopback, `file://`, redirect to a private IP, credentials in URL
+- [x] Friendly error messages for each failure type (invalid URL, blocked, timeout, not HTML, too large)
 
 **Done when:** all SSRF test cases are rejected and a normal public site fetches successfully.
 
