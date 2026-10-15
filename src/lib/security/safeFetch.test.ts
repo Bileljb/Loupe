@@ -4,6 +4,7 @@ import zlib from "node:zlib";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { FetchError } from "./errors";
 import {
+  MAX_HEADER_BYTES,
   MAX_REDIRECTS,
   nodeTransport,
   safeFetch,
@@ -262,6 +263,16 @@ describe("nodeTransport (real sockets on a local test server)", () => {
   it("returns non-2xx pages without a content-type check so callers can see the status", async () => {
     const port = await serve((_req, res) => res.writeHead(404, { "content-type": "text/html" }).end("missing"));
     expect(await nodeTransport(hop(port, { kind: "robots" }))).toMatchObject({ status: 404, body: "missing" });
+  });
+
+  it("accepts response headers larger than Node's 16 KB default", async () => {
+    const port = await serve((_req, res) => res.writeHead(200, { ...htmlHeaders, "content-security-policy": "x".repeat(30_000) }).end("ok"));
+    expect((await nodeTransport(hop(port))).body).toBe("ok");
+  });
+
+  it(`rejects response headers over ${MAX_HEADER_BYTES / 1024} KB`, async () => {
+    const port = await serve((_req, res) => res.writeHead(200, { ...htmlHeaders, "x-huge": "x".repeat(MAX_HEADER_BYTES + 1) }).end("ok"));
+    await expect(nodeTransport(hop(port))).rejects.toThrow();
   });
 
   it("stops when the signal aborts", async () => {

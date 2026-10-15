@@ -47,6 +47,7 @@ export type SafeFetchOptions = {
 export const MAX_REDIRECTS = 5;
 const DEFAULT_TIMEOUT_MS = 10_000;
 const DEFAULT_MAX_BYTES = 2 * 1024 * 1024;
+export const MAX_HEADER_BYTES = 64 * 1024;
 const REDIRECT_STATUSES = new Set([301, 302, 303, 307, 308]);
 
 const ACCEPT: Record<FetchKind, string> = {
@@ -150,6 +151,8 @@ export const nodeTransport: Transport = ({ url, addresses, kind, signal, maxByte
         },
         lookup: pinnedLookup(addresses),
         agent: false, // no connection reuse across validations
+        // Node's 16 KB default rejects real sites with large CSP/cookie headers (e.g. webflow.com).
+        maxHeaderSize: MAX_HEADER_BYTES,
         signal,
       },
       (res) => {

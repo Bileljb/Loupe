@@ -268,16 +268,18 @@ Server-side fetching of user-supplied URLs is an SSRF risk.
 
 ## Phase 2: Core model and HTML checks
 
-- [ ] Define `Issue`, `Report`, `Category`, `Severity` Zod schemas in `schemas.ts`
-- [ ] SEO checks: title (missing/too short/too long), meta description, H1 (missing/multiple), heading order, canonical, `lang`, viewport, Open Graph basics, robots meta (noindex), image alt text
-- [ ] Technical checks: HTTPS, final status code, redirect chain length, mixed content, security headers (HSTS, CSP, X-Frame-Options, X-Content-Type-Options), favicon
-- [ ] Site files: `robots.txt` and `sitemap.xml` presence
-- [ ] Accessibility checks (Cheerio): missing alt, unlabeled inputs, empty links/buttons, missing `lang`
-- [ ] JS-shell detection (near-empty body, no title/H1, framework root only) sets `partial.jsShellSuspected`
-- [ ] `detectPlatform(html, headers)` returns `{ name, confidence }` using multiple signals per platform (WordPress, Wix, Shopify, Squarespace, Webflow)
-- [ ] Local business checks (tagged `local`): LocalBusiness JSON-LD, phone + `tel:` link, address, opening hours, Maps link/embed
-- [ ] Fixtures for each platform and for local-business pass/fail cases
-- [ ] Unit tests with small HTML fixtures (pass and fail cases per check)
+- [x] Define `Issue`, `Report`, `Category`, `Severity` Zod schemas in `schemas.ts`
+- [x] SEO checks: title (missing/too short/too long), meta description, H1 (missing/multiple), heading order, canonical, `lang`, viewport, Open Graph basics, robots meta (noindex), image alt text
+- [x] Technical checks: HTTPS, final status code, redirect chain length, mixed content, security headers (HSTS, CSP, X-Frame-Options, X-Content-Type-Options), favicon
+- [x] Site files: `robots.txt` and `sitemap.xml` presence
+- [x] Accessibility checks (Cheerio): missing alt, unlabeled inputs, empty links/buttons, missing `lang`
+- [x] JS-shell detection (near-empty body, no title/H1, framework root only) sets `partial.jsShellSuspected`
+- [x] `detectPlatform(html, headers)` returns `{ name, confidence }` using multiple signals per platform (WordPress, Wix, Shopify, Squarespace, Webflow)
+- [x] Local business checks (tagged `local`): LocalBusiness JSON-LD, phone + `tel:` link, address, opening hours, Maps link/embed
+- [x] Fixtures for each platform and for local-business pass/fail cases
+- [x] Unit tests with small HTML fixtures (pass and fail cases per check)
+
+Note: `lang` and image alt text are single checks filed under accessibility (not duplicated in SEO) so a site isn't penalized twice. Extra files beyond the folder structure: `checks/registry.ts` (check ids), `checks/page.ts` (snapshot type), `checks/local.ts`, `checks/platform.ts`, `checks/jsShell.ts`, `checks/index.ts` (`runHtmlChecks`).
 
 **Done when:** each check returns correct `Issue[]` on fixtures, with evidence values filled in.
 

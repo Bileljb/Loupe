@@ -41,3 +41,55 @@ export const auditInputSchema = z.object({
 });
 
 export type AuditInput = z.infer<typeof auditInputSchema>;
+
+export const severitySchema = z.enum(["critical", "warning", "info"]);
+export type Severity = z.infer<typeof severitySchema>;
+
+export const categorySchema = z.enum(["performance", "seo", "accessibility", "technical"]);
+export type Category = z.infer<typeof categorySchema>;
+
+export const platformNameSchema = z.enum(["wordpress", "wix", "shopify", "squarespace", "webflow", "unknown"]);
+export type Platform = z.infer<typeof platformNameSchema>;
+
+export const confidenceSchema = z.enum(["high", "medium", "low"]);
+export type Confidence = z.infer<typeof confidenceSchema>;
+
+export const issueSchema = z.object({
+  // Plain string, not CheckId: stored reports may hold ids from older versions or from PSI.
+  id: z.string().min(1),
+  category: categorySchema,
+  severity: severitySchema,
+  passed: z.boolean(),
+  // Raw values from an untrusted site. Escape before rendering.
+  evidence: z.record(z.string(), z.unknown()).optional(),
+  tags: z.array(z.literal("local")).optional(),
+});
+export type Issue = z.infer<typeof issueSchema>;
+
+const score = z.number().min(0).max(100);
+
+export const reportSchema = z.object({
+  schemaVersion: z.literal(1),
+  id: z.string().min(12),
+  url: z.string(),
+  createdAt: z.iso.datetime(),
+  scores: z.object({
+    overall: score,
+    performance: score,
+    seo: score,
+    accessibility: score,
+    technical: score,
+  }),
+  issues: z.array(issueSchema),
+  partial: z
+    .object({
+      psiFailed: z.boolean().optional(),
+      htmlFailed: z.boolean().optional(),
+      jsShellSuspected: z.boolean().optional(),
+    })
+    .optional(),
+  platform: z.object({ name: platformNameSchema, confidence: confidenceSchema }).optional(),
+  localChecks: z.boolean(),
+  previousReportId: z.string().optional(),
+});
+export type Report = z.infer<typeof reportSchema>;

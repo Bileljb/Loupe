@@ -42,19 +42,21 @@ Status: ✅ done · ⏳ waiting on you (account or manual task) · ⬜ not start
 | Friendly error for each failure, in all three languages: invalid URL, blocked, timeout, not HTML, too large, unreachable, too many redirects | ✅ |
 | Tests: localhost, `127.0.0.1`, `10.x`, `169.254.169.254`, IPv6 loopback, `file://`, redirect to private IP, credentials in URL | ✅ |
 
-## Phase 2: Core model and HTML checks
+## Phase 2: Core model and HTML checks ✅
 
 | Feature | Status |
 |---|---|
-| Typed data model: Issue, Report, Category, Severity, Platform (Zod) | ⬜ |
-| **SEO checks:** title (missing, too short, too long), meta description, H1 (missing, multiple), heading order, canonical, `lang`, viewport, Open Graph basics, `noindex`, image alt text | ⬜ |
-| **Technical checks:** HTTPS, final status code, redirect chain length, mixed content, security headers (HSTS, CSP, X-Frame-Options, X-Content-Type-Options), favicon | ⬜ |
-| **Site files:** `robots.txt` and `sitemap.xml` present | ⬜ |
-| **Accessibility checks (automated):** missing alt text, unlabeled inputs, empty links/buttons, missing `lang` | ⬜ |
-| JavaScript-only site detection (near-empty page) flags the report as partial | ⬜ |
-| Platform detection with confidence level: WordPress, Wix, Shopify, Squarespace, Webflow | ⬜ |
-| **Local business checks (opt-in):** business schema, phone number + tap-to-call link, address, opening hours, Google Maps link or embed | ⬜ |
-| Test fixtures per check, per platform, and for local-business pass/fail | ⬜ |
+| Typed data model: Issue, Report, Category, Severity, Platform (Zod) | ✅ |
+| One registry of 35 check ids with category and severity (the knowledge base is typed against it) | ✅ |
+| **SEO checks:** title (missing, too short, too long), meta description (missing, too short, too long), H1 (missing, multiple), heading order, canonical, viewport, Open Graph basics, `noindex` (meta tag and header) | ✅ |
+| **Technical checks:** HTTPS, final status code, redirect chain length, mixed content, security headers (HSTS, CSP, X-Frame-Options or CSP frame-ancestors, X-Content-Type-Options), favicon | ✅ |
+| **Site files:** `robots.txt` and `sitemap.xml` present (sitemap also found via robots.txt) | ✅ |
+| **Accessibility checks (automated):** missing alt text, unlabeled form fields, empty links/buttons, missing `lang` (counted once, not also in SEO) | ✅ |
+| JavaScript-only site detection (near-empty page) flags the report as partial | ✅ |
+| Platform detection with confidence level: WordPress, Wix, Shopify, Squarespace, Webflow | ✅ |
+| **Local business checks (opt-in):** business schema, phone number + tap-to-call link, address, opening hours, Google Maps link or embed | ✅ |
+| Evidence on every failed issue, shortened to keep reports small | ✅ |
+| Test fixtures per check, per platform, and for local-business pass/fail | ✅ |
 
 ## Phase 3: Knowledge base (the report's words)
 
