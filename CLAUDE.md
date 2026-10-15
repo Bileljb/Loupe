@@ -250,7 +250,7 @@ Server-side fetching of user-supplied URLs is an SSRF risk.
 - [x] Add `.env.example` and `.env.local` (not committed)
 - [x] Add scripts: `test`, `typecheck`, `lint`
 - [x] Create the folder structure above
-- [ ] Get a PageSpeed Insights API key (Google Cloud Console), restricted to the PSI API
+- [x] Get a PageSpeed Insights API key (Google Cloud Console), restricted to the PSI API
 - [ ] Create a free Upstash Redis database (needed from Phase 6); fill `.env.local`
 - [x] Create `lib/siteConfig.ts` (name, tagline, URL) and use it everywhere instead of hardcoding the brand
 
@@ -305,12 +305,14 @@ Note: there is no single `kb/issues.ts`. Translated text lives in `kb/en.ts`, `k
 
 ## Phase 4: PageSpeed Insights integration
 
-- [ ] `psi.ts` client: `strategy=mobile`, categories `performance`, `accessibility`, `seo`, `best-practices`
-- [ ] Zod-parse only the fields we use (scores, Core Web Vitals: LCP, CLS, INP/TBT, FCP, top opportunities)
-- [ ] Map PSI audits to `Issue[]` (limit to the top 3-5 performance opportunities)
-- [ ] Use the PSI accessibility score as the base accessibility signal
-- [ ] Handle quota errors, timeouts, and non-200 responses with a `partial` result
-- [ ] Mock PSI responses in tests (save 1-2 real responses as fixtures)
+- [x] `psi.ts` client: `strategy=mobile`, categories `performance`, `accessibility`, `seo`, `best-practices`
+- [x] Zod-parse only the fields we use (scores, Core Web Vitals: LCP, CLS, INP/TBT, FCP, top opportunities)
+- [x] Map PSI audits to `Issue[]` (limit to the top 3-5 performance opportunities)
+- [x] Use the PSI accessibility score as the base accessibility signal
+- [x] Handle quota errors, timeouts, and non-200 responses with a `partial` result
+- [x] Mock PSI responses in tests (save 1-2 real responses as fixtures)
+
+Note: the fetch client lives in `audit/psiClient.ts` (I/O stays out of `checks/`); `checks/psi.ts` holds the Zod schema and the pure `mapPsiResult`. PSI runs Lighthouse 13, which replaced most opportunity audits with `*-insight` audits; both new and legacy ids are mapped. Metric issues are judged on the lab run (INP can't be measured in the lab, so TBT is the proxy); real-user field data goes into `evidence` when available. Unmapped failing audits go to `performance.other` only when PSI estimates a time saving. Core Web Vitals live in the `evidence` of the metric issues (no Report schema change). `mapPsiResult` returns the PSI accessibility score; how it combines with penalty scoring is decided in Phase 5. `fetchPsi` throws `PsiError` (`PSI_QUOTA`, `PSI_TIMEOUT`, `PSI_FAILED`, `PSI_INVALID_RESPONSE`) for the orchestrator to turn into `partial.psiFailed`.
 
 **Done when:** a real URL returns normalized issues and Core Web Vitals; failures degrade gracefully.
 
