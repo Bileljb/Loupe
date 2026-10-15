@@ -66,7 +66,9 @@ export const issueSchema = z.object({
 });
 export type Issue = z.infer<typeof issueSchema>;
 
-const score = z.number().min(0).max(100);
+const score = z.number().int().min(0).max(100);
+// null: the category couldn't be checked (e.g. PSI failed). Never shown as a made-up 100.
+const categoryScore = score.nullable();
 
 export const reportSchema = z.object({
   schemaVersion: z.literal(1),
@@ -75,10 +77,10 @@ export const reportSchema = z.object({
   createdAt: z.iso.datetime(),
   scores: z.object({
     overall: score,
-    performance: score,
-    seo: score,
-    accessibility: score,
-    technical: score,
+    performance: categoryScore,
+    seo: categoryScore,
+    accessibility: categoryScore,
+    technical: categoryScore,
   }),
   issues: z.array(issueSchema),
   partial: z

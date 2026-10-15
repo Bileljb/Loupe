@@ -91,7 +91,7 @@ type Report = {
   id: string;
   url: string;             // normalized
   createdAt: string;       // ISO
-  scores: { overall: number } & Record<Category, number>;
+  scores: { overall: number } & Record<Category, number | null>; // null = category not checked
   issues: Issue[];
   partial?: { psiFailed?: boolean; htmlFailed?: boolean; jsShellSuspected?: boolean };
   platform?: { name: Platform; confidence: "high" | "medium" | "low" };
@@ -318,11 +318,13 @@ Note: the fetch client lives in `audit/psiClient.ts` (I/O stays out of `checks/`
 
 ## Phase 5: Orchestrator and scoring
 
-- [ ] `runAudit(url)`: validate, run PSI and HTML pipeline **in parallel** (`Promise.allSettled`)
-- [ ] Merge into one `Issue[]`; dedupe overlapping findings (PSI vs Cheerio)
-- [ ] `score.ts`: category scores, overall score, severity-based prioritization
-- [ ] Sort issues by severity, then impact/effort
-- [ ] Tests for scoring and for partial-failure cases
+- [x] `runAudit(url)`: validate, run PSI and HTML pipeline **in parallel** (`Promise.allSettled`)
+- [x] Merge into one `Issue[]`; dedupe overlapping findings (PSI vs Cheerio)
+- [x] `score.ts`: category scores, overall score, severity-based prioritization
+- [x] Sort issues by severity, then impact/effort
+- [x] Tests for scoring and for partial-failure cases
+
+Note: category scores are `null` when that category could not be checked (PSI or page fetch failed); the overall score is the weighted average of the checked categories with weights rescaled. Accessibility = the lower of the PSI accessibility score and our penalty score (both look at alt text, labels, etc., so stacking penalties would count problems twice). `runAudit` checks the URL with the SSRF validator before PSI is called, throws `FetchError` only for invalid/blocked URLs or when both sources fail (the page error wins), emits `AuditProgress` events for the Phase 7 stream, and generates the report id (`newReportId`, 16 url-safe chars). `fixFirst` and `letterGrade` live in `score.ts`. PSI and Cheerio produce no overlapping ids today; `mergeIssues` dedupes by id (a failure wins) in case they do later.
 
 **Done when:** `runAudit` returns a valid `Report` for a real site, and a report with only one source succeeded.
 
