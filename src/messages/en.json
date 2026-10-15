@@ -1,0 +1,17 @@
+{
+  "Site": {
+    "tagline": "A free, plain-language health check for your website"
+  },
+  "Metadata": {
+    "title": "{name}: free website health check",
+    "description": "Check your homepage for speed, search visibility, accessibility and technical problems. Get a clear report in plain language, with what to fix first."
+  },
+  "HomePage": {
+    "title": "Is your website helping or hurting your business?",
+    "intro": "Enter your homepage address and get a clear report: what is wrong, why it matters, and what to fix first.",
+    "scope": "We check one page (your homepage) plus your robots.txt and sitemap files."
+  },
+  "LocaleSwitcher": {
+    "label": "Language"
+  }
+}

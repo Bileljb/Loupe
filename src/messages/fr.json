@@ -1,0 +1,17 @@
+{
+  "Site": {
+    "tagline": "Un bilan de santé gratuit et clair pour votre site web"
+  },
+  "Metadata": {
+    "title": "{name} : bilan de santé gratuit de votre site",
+    "description": "Vérifiez la vitesse, la visibilité sur Google, l'accessibilité et les problèmes techniques de votre page d'accueil. Un rapport clair, avec les priorités."
+  },
+  "HomePage": {
+    "title": "Votre site aide-t-il ou freine-t-il votre activité ?",
+    "intro": "Saisissez l'adresse de votre page d'accueil et recevez un rapport clair : ce qui ne va pas, pourquoi c'est important et quoi corriger en premier.",
+    "scope": "Nous vérifions une seule page (votre page d'accueil), ainsi que vos fichiers robots.txt et sitemap."
+  },
+  "LocaleSwitcher": {
+    "label": "Langue"
+  }
+}
