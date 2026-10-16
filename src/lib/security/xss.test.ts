@@ -4,9 +4,12 @@ import { describe, expect, it } from "vitest";
 
 // Reports show text from untrusted sites (titles, meta values, URLs). They must only ever reach the
 // page as React text, which is escaped. This guard fails if code starts using a raw-HTML sink.
-// JSON-LD (Phase 10) will need one reviewed exception: add it to ALLOWED with a reason.
+// Exceptions need a reason and a test of their own.
 const SINKS = /dangerouslySetInnerHTML|\.innerHTML\s*=|outerHTML|insertAdjacentHTML|document\.write|new Function\(|\beval\(/;
-const ALLOWED = new Set<string>();
+const ALLOWED = new Set<string>([
+  // JSON-LD must be a raw <script>. It holds only our own data and escapes "<" (see JsonLd.test.tsx).
+  "components/JsonLd.tsx",
+]);
 
 const root = join(__dirname, "..", "..");
 

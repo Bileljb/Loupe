@@ -4,14 +4,77 @@
   },
   "Metadata": {
     "title": "{name} : bilan de santé gratuit de votre site",
-    "description": "Vérifiez la vitesse, la visibilité sur Google, l'accessibilité et les problèmes techniques de votre page d'accueil. Un rapport clair, avec les priorités."
+    "description": "Vérifiez la vitesse, la visibilité sur Google, l'accessibilité et les problèmes techniques de votre page d'accueil. Un rapport clair, avec les priorités.",
+    "guidesTitle": "Guides : corriger les problèmes courants",
+    "guidesDescription": "Des guides simples pour corriger les problèmes courants d'un site : visibilité dans les recherches, vitesse sur mobile, accessibilité, sécurité. Avec WordPress, Wix, Shopify.",
+    "notFoundTitle": "Page introuvable"
   },
   "HomePage": {
     "title": "Votre site aide-t-il ou freine-t-il votre activité ?",
     "intro": "Saisissez l'adresse de votre page d'accueil et recevez un rapport clair : ce qui ne va pas, pourquoi c'est important et quoi corriger en premier.",
     "scope": "Nous vérifions une seule page (votre page d'accueil), ainsi que vos fichiers robots.txt et sitemap.",
     "trust": "Gratuit, sans inscription. Des vérifications automatiques, pas un audit complet.",
-    "exampleLink": "Voir un exemple de rapport"
+    "exampleLink": "Voir un exemple de rapport",
+    "checksTitle": "Ce que nous vérifions",
+    "checks": {
+      "performance": {
+        "title": "Vitesse sur mobile",
+        "body": "Google mesure la vitesse de chargement de votre page d'accueil sur un téléphone, comme la voient la plupart de vos visiteurs."
+      },
+      "seo": {
+        "title": "Visibilité dans les recherches",
+        "body": "Le titre de votre page, le résumé affiché dans Google, les titres, et si les moteurs de recherche ont le droit d'afficher votre page."
+      },
+      "accessibility": {
+        "title": "Facile à utiliser pour tous",
+        "body": "Des vérifications automatiques des descriptions d'images, des champs de formulaire et des boutons, pour que plus de monde puisse utiliser votre site."
+      },
+      "technical": {
+        "title": "Santé technique",
+        "body": "Une connexion sécurisée, les pages d'erreur, les redirections, les protections de base, l'icône du site et les fichiers qui guident les moteurs de recherche."
+      },
+      "local": {
+        "title": "Informations pour les clients locaux",
+        "body": "Si vous servez une clientèle locale : votre adresse, un numéro sur lequel on peut appuyer pour appeler, vos horaires et une carte."
+      }
+    },
+    "howTitle": "Comment ça marche",
+    "how": {
+      "step1": "Saisissez l'adresse de votre page d'accueil. Sans inscription, sans paiement.",
+      "step2": "Nous lançons le test de vitesse de Google sur téléphone et nos propres vérifications de votre page. Cela prend environ une minute.",
+      "step3": "Vous recevez un rapport clair : quoi corriger en premier, pourquoi c'est important, et les étapes pour votre plateforme."
+    },
+    "whoTitle": "Pour qui ?",
+    "who": "Pour les patrons de petites entreprises qui veulent savoir si leur site leur fait perdre des clients, sans apprendre de mots techniques. Si vous travaillez avec un développeur ou une agence, un bouton transforme votre rapport en liste de tâches pour eux.",
+    "guidesTitle": "Guides populaires",
+    "guidesAll": "Voir tous les guides",
+    "faqTitle": "Questions fréquentes",
+    "faq": {
+      "free": {
+        "q": "Est-ce gratuit ?",
+        "a": "Oui. La vérification de votre site est gratuite et il n'y a rien à acheter."
+      },
+      "signup": {
+        "q": "Faut-il créer un compte ?",
+        "a": "Non. Saisissez votre adresse et recevez votre rapport. Pas de compte, pas d'inscription."
+      },
+      "what": {
+        "q": "Que vérifiez-vous exactement ?",
+        "a": "Une seule page, votre page d'accueil, ainsi que vos fichiers robots.txt et sitemap. Nous regardons la vitesse sur mobile, la visibilité dans les recherches, la facilité d'utilisation et la santé technique."
+      },
+      "full": {
+        "q": "Est-ce un audit complet de mon site ?",
+        "a": "Non. Ce sont des vérifications automatiques d'une seule page. Elles trouvent vite les problèmes courants, mais ne remplacent pas l'avis d'une personne et ne testent pas toutes les pages."
+      },
+      "kept": {
+        "q": "Combien de temps mon rapport est-il conservé ?",
+        "a": "Les rapports sont conservés 30 jours pour que vous puissiez partager le lien, puis supprimés automatiquement."
+      },
+      "rescan": {
+        "q": "Comment savoir si mes corrections ont marché ?",
+        "a": "Ouvrez votre rapport et choisissez « Revérifier mon site ». Nous vérifions à nouveau et montrons ce qui a été corrigé et l'évolution de votre score."
+      }
+    }
   },
   "AuditForm": {
     "urlLabel": "L'adresse de votre site",
@@ -135,7 +198,8 @@
       "devDetails": "Détails pour les développeurs",
       "checkId": "Identifiant de la vérification",
       "evidence": "Ce que nous avons mesuré",
-      "example": "Exemple de code"
+      "example": "Exemple de code",
+      "guide": "Lire le guide complet"
     },
     "rescan": {
       "button": "Revérifier mon site",
@@ -209,5 +273,41 @@
     "TOO_MANY_REDIRECTS": "Cette adresse renvoie les visiteurs vers trop d'autres adresses. Vérifiez qu'elle mène bien à votre page d'accueil.",
     "RATE_LIMITED": "Vous avez lancé beaucoup de vérifications dans la dernière heure. Réessayez dans {minutes} min.",
     "SERVER_ERROR": "Un problème est survenu de notre côté. Réessayez dans un instant."
+  },
+  "Nav": {
+    "home": "Accueil",
+    "guides": "Guides",
+    "footerNote": "Des vérifications automatiques d'une seule page, pas un audit complet.",
+    "footerLabel": "Liens du site"
+  },
+  "Guides": {
+    "indexTitle": "Guides : corriger les problèmes courants d'un site",
+    "indexIntro": "Des guides courts et simples pour les problèmes que nous trouvons le plus souvent. Chacun explique ce qui ne va pas, pourquoi c'est important pour votre activité et comment le corriger, avec les étapes pour les créateurs de sites populaires.",
+    "groups": {
+      "seo": "Visibilité dans les recherches",
+      "performance": "Vitesse sur mobile",
+      "accessibility": "Facile à utiliser pour tous",
+      "technical": "Santé technique",
+      "local": "Informations pour les clients locaux"
+    },
+    "breadcrumbLabel": "Fil d'Ariane",
+    "eyebrow": "Guide",
+    "whatTitle": "Le problème",
+    "whyTitle": "Pourquoi c'est important",
+    "fixTitle": "Comment corriger",
+    "platformsTitle": "Étape par étape sur votre plateforme",
+    "platformsNote": "Les noms des menus changent de temps en temps. Si une étape ne correspond pas à ce que vous voyez, cherchez un réglage au nom proche.",
+    "devTitle": "Pour votre développeur",
+    "devIntro": "Un exemple de code à transmettre à la personne qui gère votre site :",
+    "ctaTitle": "Votre site a-t-il ce problème ?",
+    "ctaBody": "Lancez une vérification gratuite de votre page d'accueil. Cela prend environ une minute, sans inscription.",
+    "ctaButton": "Vérifier mon site",
+    "relatedTitle": "Guides liés"
+  },
+  "NotFound": {
+    "title": "Page introuvable",
+    "body": "Cette page n'existe pas ou a été déplacée.",
+    "home": "Aller à l'accueil",
+    "guides": "Parcourir les guides"
   }
 }

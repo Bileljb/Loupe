@@ -4,14 +4,77 @@
   },
   "Metadata": {
     "title": "{name}: free website health check",
-    "description": "Check your homepage for speed, search visibility, accessibility and technical problems. Get a clear report in plain language, with what to fix first."
+    "description": "Check your homepage for speed, search visibility, accessibility and technical problems. Get a clear report in plain language, with what to fix first.",
+    "guidesTitle": "Guides: fix common website problems",
+    "guidesDescription": "Plain-language guides to fix common website problems: showing up in search, speed on phones, accessibility and security. With steps for WordPress, Wix and Shopify.",
+    "notFoundTitle": "Page not found"
   },
   "HomePage": {
     "title": "Is your website helping or hurting your business?",
     "intro": "Enter your homepage address and get a clear report: what is wrong, why it matters, and what to fix first.",
     "scope": "We check one page (your homepage) plus your robots.txt and sitemap files.",
     "trust": "Free, no sign-up. Automated checks, not a full audit.",
-    "exampleLink": "See an example report"
+    "exampleLink": "See an example report",
+    "checksTitle": "What we check",
+    "checks": {
+      "performance": {
+        "title": "Speed on phones",
+        "body": "Google tests how fast your homepage loads on a phone, the way most of your visitors see it."
+      },
+      "seo": {
+        "title": "Showing up in search",
+        "body": "Your page title, the summary shown in Google, headings, and whether search engines are allowed to list your page."
+      },
+      "accessibility": {
+        "title": "Easy for everyone to use",
+        "body": "Automated checks for image descriptions, labelled form fields and buttons, so more people can use your site."
+      },
+      "technical": {
+        "title": "Technical health",
+        "body": "A secure connection, error pages, redirects, basic protections, your site icon, and the files that guide search engines."
+      },
+      "local": {
+        "title": "Local business details",
+        "body": "If you serve local customers: your address, a phone number people can tap, opening hours and a map."
+      }
+    },
+    "howTitle": "How it works",
+    "how": {
+      "step1": "Enter your homepage address. No sign-up, no payment.",
+      "step2": "We run Google's speed test on a phone and our own checks of your page. It takes about a minute.",
+      "step3": "You get a plain-language report: what to fix first, why it matters, and steps for your platform."
+    },
+    "whoTitle": "Who it's for",
+    "who": "Small business owners who want to know if their website is costing them customers, without learning technical words. If you work with a developer or an agency, one button turns your report into a to-do list for them.",
+    "guidesTitle": "Popular guides",
+    "guidesAll": "See all guides",
+    "faqTitle": "Frequently asked questions",
+    "faq": {
+      "free": {
+        "q": "Is it free?",
+        "a": "Yes. Checking your website is free and there is nothing to buy."
+      },
+      "signup": {
+        "q": "Do I need an account?",
+        "a": "No. Enter your address and get your report. There are no accounts and no sign-up."
+      },
+      "what": {
+        "q": "What exactly do you check?",
+        "a": "One page, your homepage, plus your robots.txt and sitemap files. We look at speed on phones, showing up in search, ease of use and technical health."
+      },
+      "full": {
+        "q": "Is this a full audit of my website?",
+        "a": "No. These are automated checks of one page. They find common problems quickly, but they can't replace a review by a person or test every page."
+      },
+      "kept": {
+        "q": "How long is my report kept?",
+        "a": "Reports are kept for 30 days so you can share the link, then deleted automatically."
+      },
+      "rescan": {
+        "q": "How do I know if my fixes worked?",
+        "a": "Open your report and choose \"Re-scan my site\". We check again and show what was fixed and how your score changed."
+      }
+    }
   },
   "AuditForm": {
     "urlLabel": "Your website address",
@@ -135,7 +198,8 @@
       "devDetails": "Developer details",
       "checkId": "Check id",
       "evidence": "What we measured",
-      "example": "Example code"
+      "example": "Example code",
+      "guide": "Read the full guide"
     },
     "rescan": {
       "button": "Re-scan my site",
@@ -209,5 +273,41 @@
     "TOO_MANY_REDIRECTS": "This address sends visitors through too many other addresses. Check that it leads to your homepage.",
     "RATE_LIMITED": "You have run a lot of checks in the last hour. Please try again in {minutes} min.",
     "SERVER_ERROR": "Something went wrong on our side. Please try again in a moment."
+  },
+  "Nav": {
+    "home": "Home",
+    "guides": "Guides",
+    "footerNote": "Automated checks of one page, not a full audit.",
+    "footerLabel": "Site links"
+  },
+  "Guides": {
+    "indexTitle": "Guides: fix common website problems",
+    "indexIntro": "Short, plain-language guides for the problems we find most often. Each one explains what is wrong, why it matters for your business and how to fix it, with steps for popular website builders.",
+    "groups": {
+      "seo": "Showing up in search",
+      "performance": "Speed on phones",
+      "accessibility": "Easy for everyone to use",
+      "technical": "Technical health",
+      "local": "Local business details"
+    },
+    "breadcrumbLabel": "Breadcrumb",
+    "eyebrow": "Guide",
+    "whatTitle": "What the problem is",
+    "whyTitle": "Why it matters",
+    "fixTitle": "How to fix it",
+    "platformsTitle": "Step by step on your platform",
+    "platformsNote": "Menu names change from time to time. If a step doesn't match what you see, look for a setting with a similar name.",
+    "devTitle": "For your developer",
+    "devIntro": "Example code to share with whoever builds your site:",
+    "ctaTitle": "Does your website have this problem?",
+    "ctaBody": "Run a free check of your homepage. It takes about a minute, with no sign-up.",
+    "ctaButton": "Check my website",
+    "relatedTitle": "Related guides"
+  },
+  "NotFound": {
+    "title": "Page not found",
+    "body": "This page doesn't exist or has moved.",
+    "home": "Go to the home page",
+    "guides": "Browse the guides"
   }
 }

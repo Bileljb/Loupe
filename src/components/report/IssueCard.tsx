@@ -1,5 +1,7 @@
 import { getTranslations } from "next-intl/server";
 import { ChevronDown } from "lucide-react";
+import { Link } from "@/i18n/navigation";
+import { guideSlugFor } from "@/lib/guides";
 import type { KbEntry } from "@/lib/kb";
 import type { Issue } from "@/lib/schemas";
 import { SeverityBadge } from "./SeverityBadge";
@@ -19,6 +21,7 @@ export function issueAnchor(id: string): string {
 export async function IssueCard({ issue, entry, platformName }: Props) {
   const t = await getTranslations("Report");
   const evidence = issue.evidence && Object.keys(issue.evidence).length > 0 ? issue.evidence : null;
+  const guideSlug = guideSlugFor(issue.id);
 
   return (
     <article id={issueAnchor(issue.id)} aria-labelledby={`${issueAnchor(issue.id)}-title`} className="bg-card flex scroll-mt-6 flex-col gap-4 rounded-xl border p-5">
@@ -64,6 +67,13 @@ export async function IssueCard({ issue, entry, platformName }: Props) {
           </dd>
         </div>
       </dl>
+
+      {guideSlug && (
+        <Link href={`/guides/${guideSlug}`} className="text-primary w-fit text-sm font-medium underline-offset-4 hover:underline">
+          {t("issue.guide")}
+          <span className="sr-only">: {entry.title}</span>
+        </Link>
+      )}
 
       <details data-dev-details className="group rounded-lg border">
         <summary className="hover:bg-muted/50 flex cursor-pointer list-none items-center justify-between gap-2 rounded-lg px-3 py-2 text-sm font-medium [&::-webkit-details-marker]:hidden">

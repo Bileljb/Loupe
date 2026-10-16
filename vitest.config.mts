@@ -8,6 +8,6 @@ export default defineConfig({
   test: {
     // Checks, scoring and storage logic are pure server-side functions.
     environment: "node",
-    include: ["src/**/*.test.ts"],
+    include: ["src/**/*.test.ts", "src/**/*.test.tsx"],
   },
 });

@@ -390,20 +390,22 @@ Note: limiters live in `storage/redis.ts` (`createRedisLimiter`, which fails ope
 
 ## Phase 10: SEO optimization
 
-- [ ] Root layout: `metadataBase`, default title template, default OG/Twitter metadata, `lang` set
-- [ ] Landing page: unique title, description, canonical, single `<h1>`, real copy sections, FAQ
-- [ ] `app/sitemap.ts` (landing + guides only, all locales) and `app/robots.ts` (disallow `/api/` and report paths for every locale)
-- [ ] hreflang (`alternates.languages` with `x-default`) and per-locale canonicals on landing and guides
-- [ ] Translated metadata, JSON-LD, and OG images for `en`, `fr`, `ar`; verify Arabic text renders correctly in OG images
-- [ ] `/report/[id]`: `noindex, nofollow` via `generateMetadata`; confirmed absent from the sitemap
-- [ ] Typed `<JsonLd />` component; `WebApplication` + `FAQPage` on landing; `BreadcrumbList` + `Article`/`HowTo` on guides
-- [ ] `/guides/[slug]` generated from `kb/issues.ts` with `generateStaticParams` (one page per check, platform-specific sections, related guides, audit CTA)
-- [ ] Internal links: landing -> guides, guides <-> related guides, issue cards -> matching guide
-- [ ] Dynamic OG images (`opengraph-image.tsx`) for landing and guides
-- [ ] `next/font` and `next/image` everywhere; check bundle size of public pages
-- [ ] Redirect `www`/apex to one canonical host; custom 404 page
-- [ ] Validate structured data (Rich Results Test), check Search Console, submit sitemap
-- [ ] Lighthouse 95+ on all categories for landing and one guide page
+- [x] Root layout: `metadataBase`, default title template, default OG/Twitter metadata, `lang` set
+- [x] Landing page: unique title, description, canonical, single `<h1>`, real copy sections, FAQ
+- [x] `app/sitemap.ts` (landing + guides only, all locales) and `app/robots.ts` (disallow `/api/` and report paths for every locale)
+- [x] hreflang (`alternates.languages` with `x-default`) and per-locale canonicals on landing and guides
+- [x] Translated metadata, JSON-LD, and OG images for `en`, `fr`, `ar`; verify Arabic text renders correctly in OG images
+- [x] `/report/[id]`: `noindex, nofollow` via `generateMetadata`; confirmed absent from the sitemap
+- [x] Typed `<JsonLd />` component; `WebApplication` + `FAQPage` on landing; `BreadcrumbList` + `Article`/`HowTo` on guides
+- [x] `/guides/[slug]` generated from `kb/issues.ts` with `generateStaticParams` (one page per check, platform-specific sections, related guides, audit CTA)
+- [x] Internal links: landing -> guides, guides <-> related guides, issue cards -> matching guide
+- [x] Dynamic OG images (`opengraph-image.tsx`) for landing and guides
+- [x] `next/font` and `next/image` everywhere; check bundle size of public pages
+- [x] Redirect `www`/apex to one canonical host; custom 404 page
+- [ ] Validate structured data (Rich Results Test), check Search Console, submit sitemap (needs the deployed URL: Phase 11)
+- [ ] Lighthouse 95+ on all categories for landing and one guide page (needs the deployed URL: Phase 11)
+
+Note: `lib/seo.ts` builds every indexable page's metadata (`pageMetadata`: title, description, self canonical, hreflang en/fr/ar + x-default, full OG/Twitter, because Next replaces nested openGraph objects) and `indexablePaths()` for the sitemap. Guide slugs live in `lib/guides.ts`: English in every language, one per check except `performance.other`, and never to be renamed. There's also a `/guides` index page (not in the original plan) for crawling and internal links; the header and footer link to it. Guides use `Article` + `BreadcrumbList` (not `HowTo`, which Google no longer shows as a rich result). Guide titles skip the "| Loupe" suffix to stay under ~60 characters; 5 French KB titles are still over 60 (longest 74), so shorten them during the French review. Guide pages reuse KB text (what/why/impact/fix/platform steps/snippet), which is unique per check; richer hand-written intros would strengthen them later. `dynamicParams` isn't allowed with `cacheComponents`, so `proxy.ts` rewrites unknown guide slugs to the catch-all `[...rest]` route, giving a real 404 instead of a streamed 200. `proxy.ts` also 308-redirects the www/apex twin of `NEXT_PUBLIC_SITE_URL` (`lib/canonicalHost.ts`); configuring it at the Vercel domain level is better still. OG images: the renderer can't parse Noto Arabic fonts (GSUB lookup type 5.3), so `assets/fonts` holds IBM Plex Sans Arabic plus Geist (both OFL), and RTL text is laid out word by word because the renderer's bidi moves spaces; some Arabic word gaps are slightly uneven but readable. `JsonLd` is the one reviewed `dangerouslySetInnerHTML` (it escapes `<`, see its test). Public pages ship about 216 KB of gzipped JS, of which ~30 KB is ours (form, icons, i18n); the rest is the React/Next runtime. No images are used yet, so `next/image` isn't needed.
 
 **Done when:** the app passes its own audit with no critical or warning issues and structured data validates.
 
