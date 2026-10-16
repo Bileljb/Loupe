@@ -9,6 +9,8 @@ const SINKS = /dangerouslySetInnerHTML|\.innerHTML\s*=|outerHTML|insertAdjacentH
 const ALLOWED = new Set<string>([
   // JSON-LD must be a raw <script>. It holds only our own data and escapes "<" (see JsonLd.test.tsx).
   "components/JsonLd.tsx",
+  // Constant theme script with no interpolated user data (only a fixed storage key).
+  "components/theme/ThemeScript.tsx",
 ]);
 
 const root = join(__dirname, "..", "..");

@@ -4,6 +4,7 @@ import { Link } from "@/i18n/navigation";
 import { guideSlugFor } from "@/lib/guides";
 import type { KbEntry } from "@/lib/kb";
 import type { Issue } from "@/lib/schemas";
+import { cn } from "@/lib/utils";
 import { SeverityBadge } from "./SeverityBadge";
 
 type Props = {
@@ -17,6 +18,12 @@ export function issueAnchor(id: string): string {
   return `issue-${id}`;
 }
 
+const severityEdge: Record<Issue["severity"], string> = {
+  critical: "border-s-critical",
+  warning: "border-s-warning",
+  info: "border-s-info",
+};
+
 /** Layer 1 (owner) by default; Layer 2 (developer details) collapsed. */
 export async function IssueCard({ issue, entry, platformName }: Props) {
   const t = await getTranslations("Report");
@@ -24,12 +31,17 @@ export async function IssueCard({ issue, entry, platformName }: Props) {
   const guideSlug = guideSlugFor(issue.id);
 
   return (
-    <article id={issueAnchor(issue.id)} aria-labelledby={`${issueAnchor(issue.id)}-title`} className="bg-card flex scroll-mt-6 flex-col gap-4 rounded-xl border p-5">
-      <header className="flex flex-col gap-2">
+    <article
+      id={issueAnchor(issue.id)}
+      aria-labelledby={`${issueAnchor(issue.id)}-title`}
+      // The colored edge repeats the severity badge; it is never the only signal.
+      className={cn("bg-card shadow-soft flex flex-col gap-5 rounded-2xl border border-s-4 p-6", severityEdge[issue.severity])}
+    >
+      <header className="flex flex-col gap-3">
         <div className="flex flex-wrap items-center gap-2">
           <SeverityBadge severity={issue.severity} label={t(`severity.${issue.severity}`)} />
-          <span className="bg-muted rounded-full px-2 py-0.5 text-xs">{t(`impact.${entry.impact}`)}</span>
-          <span className="bg-muted rounded-full px-2 py-0.5 text-xs">{t(`effort.${entry.effort}`)}</span>
+          <span className="bg-muted text-muted-foreground rounded-full px-2.5 py-0.5 text-xs font-medium">{t(`impact.${entry.impact}`)}</span>
+          <span className="bg-muted text-muted-foreground rounded-full px-2.5 py-0.5 text-xs font-medium">{t(`effort.${entry.effort}`)}</span>
         </div>
         <h4 id={`${issueAnchor(issue.id)}-title`} className="text-lg font-semibold">
           {entry.title}
@@ -52,7 +64,7 @@ export async function IssueCard({ issue, entry, platformName }: Props) {
           <dd className="flex flex-col gap-2">
             {entry.platformFix && platformName ? (
               <>
-                <div className="border-primary/40 bg-primary/5 rounded-lg border-s-4 p-3">
+                <div className="border-primary/30 bg-primary/5 rounded-xl border p-4">
                   <p className="text-sm font-medium">{t("issue.platformSteps", { platform: platformName })}</p>
                   <p>{entry.platformFix}</p>
                 </div>
@@ -75,8 +87,8 @@ export async function IssueCard({ issue, entry, platformName }: Props) {
         </Link>
       )}
 
-      <details data-dev-details className="group rounded-lg border">
-        <summary className="hover:bg-muted/50 flex cursor-pointer list-none items-center justify-between gap-2 rounded-lg px-3 py-2 text-sm font-medium [&::-webkit-details-marker]:hidden">
+      <details data-dev-details className="group bg-muted/30 rounded-xl border">
+        <summary className="hover:bg-muted/60 flex cursor-pointer list-none items-center justify-between gap-2 rounded-xl px-4 py-2.5 text-sm font-medium [&::-webkit-details-marker]:hidden">
           {t("issue.devDetails")}
           <ChevronDown aria-hidden="true" className="size-4 transition-transform group-open:rotate-180" />
         </summary>

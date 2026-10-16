@@ -74,7 +74,15 @@
         "q": "How do I know if my fixes worked?",
         "a": "Open your report and choose \"Re-scan my site\". We check again and show what was fixed and how your score changed."
       }
-    }
+    },
+    "eyebrow": "Free website health check",
+    "trustFree": "Free",
+    "trustNoSignup": "No sign-up",
+    "trustFast": "Results in about a minute",
+    "previewLabel": "Example report",
+    "finalCtaTitle": "See what your website is telling customers",
+    "finalCtaBody": "One minute, one page, a clear list of what to fix first.",
+    "finalCtaButton": "Check my website"
   },
   "AuditForm": {
     "urlLabel": "Your website address",
@@ -236,6 +244,15 @@
       "copyFailed": "Couldn't copy. Select the text below and copy it yourself.",
       "preview": "Preview the message",
       "messageLabel": "Message for your developer"
+    },
+    "band": {
+      "good": "Good",
+      "ok": "Needs work",
+      "poor": "Poor"
+    },
+    "toc": {
+      "title": "On this page",
+      "overview": "Overview"
     }
   },
   "DeveloperMessage": {
@@ -278,7 +295,15 @@
     "home": "Home",
     "guides": "Guides",
     "footerNote": "Automated checks of one page, not a full audit.",
-    "footerLabel": "Site links"
+    "footerLabel": "Site links",
+    "skip": "Skip to content",
+    "themeLabel": "Color theme",
+    "theme": {
+      "system": "Match my device",
+      "light": "Light",
+      "dark": "Dark"
+    },
+    "mainLabel": "Main"
   },
   "Guides": {
     "indexTitle": "Guides: fix common website problems",
@@ -302,7 +327,8 @@
     "ctaTitle": "Does your website have this problem?",
     "ctaBody": "Run a free check of your homepage. It takes about a minute, with no sign-up.",
     "ctaButton": "Check my website",
-    "relatedTitle": "Related guides"
+    "relatedTitle": "Related guides",
+    "onThisPage": "On this page"
   },
   "NotFound": {
     "title": "Page not found",

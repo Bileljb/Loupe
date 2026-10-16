@@ -32,7 +32,7 @@ export async function ComparePanel({ comparison, previousId, previousDate, entry
           : t("same", { score: num(overall.after) });
 
   return (
-    <section aria-labelledby="compare-title" className="border-good/40 bg-good/5 flex flex-col gap-5 rounded-2xl border p-6">
+    <section aria-labelledby="compare-title" className="border-good/40 bg-good/5 flex flex-col gap-6 rounded-3xl border p-6 sm:p-8">
       <div className="flex flex-col gap-1">
         <h2 id="compare-title" className="text-xl font-semibold">
           {t("title")}

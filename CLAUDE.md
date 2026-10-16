@@ -167,6 +167,13 @@ Goal: modern, calm, and instantly understandable for non-technical owners.
 - **The app must pass its own audit**: AA contrast, keyboard navigation, visible focus, labeled controls.
 - **Trust signals**: free, no signup, honest limits ("automated checks, not a full audit"), report expiry shown.
 
+Design system as built (calm premium direction, 2026-10-16):
+- **Tokens**: every color in `globals.css` is written once with `light-dark()`, and contrast pairs meet AA. Severity colors are dark in light mode and light in dark mode, so text on solid severity fills flips color (see the grade disc).
+- **Theme**: with no class on `<html>`, the site follows the system with no JS. The header switch (`components/theme/ThemeToggle.tsx`) stores `loupe:theme` and adds `.light`/`.dark`; `ThemeScript` applies it before paint (an allowed exception in the XSS guard). `next-themes` is not used.
+- **Decorative utilities**: `bg-grid`, `bg-glow`, `border-gradient`, `surface-glass`, `text-gradient`, `shadow-soft`, `shadow-lift`, and `.reveal` (CSS scroll-driven entrance, only with `prefers-reduced-motion: no-preference` and `animation-timeline` support). No animation library.
+- **Shared pieces**: `LogoMark`, `areaIcons` (one icon per check area), `ReportPreview` (the landing page's live mini report, built from the example report), and `ScoreRing` with `scoreBand()`, whose band is also written in words.
+- **Layouts**: reports and guides use a main column plus a sticky "on this page" sidebar from `lg`. `[id]` elements have a scroll margin, so anchors clear the sticky header.
+
 ## Differentiation features (behavior rules)
 
 - **Platform detection**: detect from HTML and response headers using several signals per platform (e.g. `/wp-content/` and generator meta for WordPress; `static.wixstatic.com` for Wix; `cdn.shopify.com` for Shopify; `static1.squarespace.com` for Squarespace; `data-wf-site` for Webflow). Return a confidence level. Wording must be hedged ("This looks like a WordPress site"). Unknown platform falls back to generic fixes.

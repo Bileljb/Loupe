@@ -74,7 +74,15 @@
         "q": "Comment savoir si mes corrections ont marché ?",
         "a": "Ouvrez votre rapport et choisissez « Revérifier mon site ». Nous vérifions à nouveau et montrons ce qui a été corrigé et l'évolution de votre score."
       }
-    }
+    },
+    "eyebrow": "Bilan de santé gratuit de votre site",
+    "trustFree": "Gratuit",
+    "trustNoSignup": "Sans inscription",
+    "trustFast": "Résultats en une minute environ",
+    "previewLabel": "Exemple de rapport",
+    "finalCtaTitle": "Découvrez ce que votre site dit à vos clients",
+    "finalCtaBody": "Une minute, une page, et une liste claire de ce qu'il faut corriger en premier.",
+    "finalCtaButton": "Vérifier mon site"
   },
   "AuditForm": {
     "urlLabel": "L'adresse de votre site",
@@ -236,6 +244,15 @@
       "copyFailed": "Copie impossible. Sélectionnez le texte ci-dessous et copiez-le vous-même.",
       "preview": "Voir le message",
       "messageLabel": "Message pour votre développeur"
+    },
+    "band": {
+      "good": "Bien",
+      "ok": "À améliorer",
+      "poor": "Faible"
+    },
+    "toc": {
+      "title": "Sur cette page",
+      "overview": "Vue d'ensemble"
     }
   },
   "DeveloperMessage": {
@@ -278,7 +295,15 @@
     "home": "Accueil",
     "guides": "Guides",
     "footerNote": "Des vérifications automatiques d'une seule page, pas un audit complet.",
-    "footerLabel": "Liens du site"
+    "footerLabel": "Liens du site",
+    "skip": "Aller au contenu",
+    "themeLabel": "Thème de couleur",
+    "theme": {
+      "system": "Comme mon appareil",
+      "light": "Clair",
+      "dark": "Sombre"
+    },
+    "mainLabel": "Navigation principale"
   },
   "Guides": {
     "indexTitle": "Guides : corriger les problèmes courants d'un site",
@@ -302,7 +327,8 @@
     "ctaTitle": "Votre site a-t-il ce problème ?",
     "ctaBody": "Lancez une vérification gratuite de votre page d'accueil. Cela prend environ une minute, sans inscription.",
     "ctaButton": "Vérifier mon site",
-    "relatedTitle": "Guides liés"
+    "relatedTitle": "Guides liés",
+    "onThisPage": "Sur cette page"
   },
   "NotFound": {
     "title": "Page introuvable",

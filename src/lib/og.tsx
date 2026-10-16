@@ -50,20 +50,48 @@ export async function renderOgImage({ locale, eyebrow, title, footer }: OgConten
           justifyContent: "space-between",
           alignItems: align,
           padding: 72,
-          background: "linear-gradient(135deg, #0b1020 0%, #13204a 100%)",
-          color: "#f5f7ff",
+          color: "#f4f6ff",
           fontFamily: "Geist, IBM Plex Sans Arabic",
+          backgroundColor: "#0c1020",
+          // Glow + faint grid, matching the site's hero.
+          backgroundImage: [
+            "radial-gradient(ellipse 60% 70% at 85% 0%, rgba(110,130,255,0.45), transparent 70%)",
+            "radial-gradient(ellipse 50% 60% at 0% 100%, rgba(80,110,255,0.18), transparent 70%)",
+            "linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px)",
+            "linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px)",
+          ].join(", "),
+          backgroundSize: "100% 100%, 100% 100%, 48px 48px, 48px 48px",
         }}
       >
-        <div style={{ display: "flex", flexDirection: rtl ? "row-reverse" : "row", alignItems: "center", gap: 18 }}>
-          <div style={{ width: 56, height: 56, borderRadius: 28, border: "8px solid #7ea2ff", display: "flex" }} />
-          <div style={{ fontSize: 40, fontWeight: 700 }}>{siteConfig.name}</div>
+        <div style={{ display: "flex", flexDirection: rtl ? "row-reverse" : "row", alignItems: "center", gap: 16 }}>
+          <svg width="56" height="56" viewBox="0 0 32 32">
+            <defs>
+              <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stopColor="#8aa4ff" />
+                <stop offset="1" stopColor="#a78bfa" />
+              </linearGradient>
+            </defs>
+            <circle cx="14" cy="14" r="9.5" fill="none" stroke="#ffffff" strokeOpacity="0.18" strokeWidth="3" />
+            <path d="M14 4.5a9.5 9.5 0 0 1 9.2 11.9" fill="none" stroke="url(#g)" strokeWidth="3" strokeLinecap="round" />
+            <path d="M21.2 21.2 27 27" stroke="#f4f6ff" strokeWidth="3.2" strokeLinecap="round" />
+          </svg>
+          <div style={{ fontSize: 40, fontWeight: 700, letterSpacing: -1 }}>{siteConfig.name}</div>
         </div>
-        <div style={{ display: "flex", flexDirection: "column", alignItems: align, gap: 20, width: "100%" }}>
-          <Text text={eyebrow} rtl={rtl} style={{ fontSize: 30, color: "#9fb7ff" }} />
-          <Text text={title} rtl={rtl} style={{ fontSize: 64, lineHeight: 1.25, fontWeight: 700, maxWidth: 1050 }} />
+        <div style={{ display: "flex", flexDirection: "column", alignItems: align, gap: 24, width: "100%" }}>
+          <div
+            style={{
+              display: "flex",
+              padding: "8px 20px",
+              borderRadius: 999,
+              border: "1px solid rgba(160,180,255,0.35)",
+              backgroundColor: "rgba(120,140,255,0.12)",
+            }}
+          >
+            <Text text={eyebrow} rtl={rtl} style={{ fontSize: 26, color: "#b9c8ff" }} />
+          </div>
+          <Text text={title} rtl={rtl} style={{ fontSize: 66, lineHeight: 1.2, fontWeight: 700, maxWidth: 1056, letterSpacing: rtl ? 0 : -1.5 }} />
         </div>
-        <Text text={footer} rtl={rtl} style={{ fontSize: 26, color: "#c9d3f5" }} />
+        <Text text={footer} rtl={rtl} style={{ fontSize: 26, color: "#aab4d6" }} />
       </div>
     ),
     {

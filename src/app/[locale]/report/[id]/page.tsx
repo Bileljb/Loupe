@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 
 export default function ReportPage({ params }: PageProps<"/[locale]/report/[id]">) {
   return (
-    <main className="mx-auto flex w-full max-w-3xl flex-1 flex-col px-4 py-10 text-start sm:px-6">
+    <main className="mx-auto flex w-full max-w-6xl flex-1 flex-col px-4 py-10 text-start sm:px-6 sm:py-14">
       <Suspense fallback={<ReportSkeleton />}>
         <ReportContent params={params} />
       </Suspense>
@@ -32,18 +32,18 @@ async function ReportContent({ params }: Pick<PageProps<"/[locale]/report/[id]">
 async function ReportSkeleton() {
   const t = await getTranslations("Report");
   return (
-    <div className="flex flex-col gap-8" aria-busy="true">
+    <div className="flex flex-col gap-10 lg:me-[280px]" aria-busy="true">
       <span className="sr-only" role="status">
         {t("loading")}
       </span>
       <Skeleton className="h-9 w-3/4" />
-      <Skeleton className="h-36 w-full rounded-2xl" />
-      <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
+      <Skeleton className="h-72 w-full rounded-3xl" />
+      <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
         {["a", "b", "c", "d"].map((key) => (
-          <Skeleton key={key} className="h-40 rounded-xl" />
+          <Skeleton key={key} className="h-44 rounded-2xl" />
         ))}
       </div>
-      <Skeleton className="h-48 w-full rounded-2xl" />
+      <Skeleton className="h-56 w-full rounded-3xl" />
     </div>
   );
 }
