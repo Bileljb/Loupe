@@ -1,0 +1,452 @@
+{
+  "schemaVersion": 1,
+  "id": "example-report",
+  "url": "https://rosas-bakery.example/",
+  "createdAt": "2026-10-01T09:00:00.000Z",
+  "scores": {
+    "overall": 86,
+    "performance": 74,
+    "seo": 82,
+    "accessibility": 100,
+    "technical": 98
+  },
+  "issues": [
+    {
+      "id": "performance.images.unoptimized",
+      "category": "performance",
+      "severity": "warning",
+      "passed": false,
+      "evidence": {
+        "estimatedSavingsMs": 250,
+        "audits": [
+          {
+            "id": "image-delivery-insight",
+            "title": "Improve image delivery",
+            "displayValue": "Est savings of 466 KiB",
+            "savingsMs": 250
+          }
+        ],
+        "urls": [
+          "https://i0.wp.com/wordpress.org/files/2024/04/photo-community-1.png?resize=768%2C375&ssl=1",
+          "https://i0.wp.com/wordpress.org/files/2026/08/merch-items-03.png?resize=767%2C254&ssl=1",
+          "https://i0.wp.com/wordpress.org/files/2023/10/showcase-middle-row.png?resize=768%2C141&ssl=1",
+          "https://i0.wp.com/wordpress.org/files/2023/10/showcase-top-row-full.png?resize=768%2C140&ssl=1",
+          "https://i0.wp.com/wordpress.org/files/2025/12/wporg-69-publish.png?w=720&ssl=1"
+        ]
+      }
+    },
+    {
+      "id": "seo.viewport.missing",
+      "category": "seo",
+      "severity": "warning",
+      "passed": false,
+      "evidence": {
+        "viewport": null
+      }
+    },
+    {
+      "id": "performance.lcp.slow",
+      "category": "performance",
+      "severity": "warning",
+      "passed": false,
+      "evidence": {
+        "metric": "LCP",
+        "value": 5476,
+        "unit": "ms",
+        "goodThreshold": 2500,
+        "source": "lab",
+        "displayValue": "5.5 s",
+        "field": {
+          "metric": "LCP",
+          "value": 2890,
+          "category": "AVERAGE"
+        }
+      }
+    },
+    {
+      "id": "seo.meta-description.missing",
+      "category": "seo",
+      "severity": "warning",
+      "passed": false,
+      "evidence": {
+        "description": null
+      }
+    },
+    {
+      "id": "performance.interactivity.slow",
+      "category": "performance",
+      "severity": "warning",
+      "passed": false,
+      "evidence": {
+        "metric": "TBT",
+        "value": 212,
+        "unit": "ms",
+        "goodThreshold": 200,
+        "source": "lab",
+        "displayValue": "210 ms",
+        "field": {
+          "metric": "INP",
+          "value": 126,
+          "category": "FAST"
+        }
+      }
+    },
+    {
+      "id": "performance.first-paint.slow",
+      "category": "performance",
+      "severity": "info",
+      "passed": false,
+      "evidence": {
+        "metric": "FCP",
+        "value": 1951,
+        "unit": "ms",
+        "goodThreshold": 1800,
+        "source": "lab",
+        "displayValue": "2.0 s",
+        "field": {
+          "metric": "FCP",
+          "value": 2890,
+          "category": "AVERAGE"
+        }
+      }
+    },
+    {
+      "id": "performance.render-blocking",
+      "category": "performance",
+      "severity": "info",
+      "passed": false,
+      "evidence": {
+        "estimatedSavingsMs": 2200,
+        "audits": [
+          {
+            "id": "render-blocking-insight",
+            "title": "Render-blocking requests",
+            "displayValue": "Est savings of 2,210 ms",
+            "savingsMs": 2200
+          }
+        ],
+        "urls": [
+          "https://wordpress.org/wp-content/themes/wporg-parent-2021/build/style.css?ver=1781190440",
+          "https://wordpress.org/wp-content/themes/wporg-parent-2021/build/block-styles.css?ver=1781190440",
+          "https://wordpress.org/wp-content/mu-plugins/pub-sync/blocks/global-header-footer/build/style.css?ver=1791211855",
+          "https://wordpress.org/wp-includes/css/dashicons.min.css?ver=7.2-alpha-64355",
+          "https://wordpress.org/wp-content/themes/wporg-main-2022/build/style/style-index.css?ver=1785161844"
+        ]
+      }
+    },
+    {
+      "id": "performance.unused-code",
+      "category": "performance",
+      "severity": "info",
+      "passed": false,
+      "evidence": {
+        "estimatedSavingsMs": 1050,
+        "audits": [
+          {
+            "id": "unused-css-rules",
+            "title": "Reduce unused CSS",
+            "displayValue": "Est savings of 177 KiB",
+            "savingsMs": 1050
+          },
+          {
+            "id": "unused-javascript",
+            "title": "Reduce unused JavaScript",
+            "displayValue": "Est savings of 138 KiB",
+            "savingsMs": 0
+          }
+        ],
+        "urls": [
+          "https://wordpress.org/wp-content/mu-plugins/pub-sync/global-fonts/NotoSerif/NotoSerifSC/style.css",
+          "https://wordpress.org/wp-content/themes/wporg-main-2022/build/style/style-index.css?ver=1785161844",
+          "https://wordpress.org/wp-includes/css/dashicons.min.css?ver=7.2-alpha-64355",
+          "https://wordpress.org/wp-content/mu-plugins/pub-sync/global-fonts/NotoSerif/NotoSerifJP/style.css",
+          "https://wordpress.org/wp-content/mu-plugins/pub-sync/global-fonts/NotoSerif/NotoSerifKR/style.css"
+        ]
+      }
+    },
+    {
+      "id": "seo.canonical.missing",
+      "category": "seo",
+      "severity": "info",
+      "passed": false,
+      "evidence": {
+        "canonical": null
+      }
+    },
+    {
+      "id": "seo.open-graph.incomplete",
+      "category": "seo",
+      "severity": "info",
+      "passed": false,
+      "evidence": {
+        "missing": [
+          "og:title",
+          "og:description",
+          "og:image"
+        ]
+      }
+    },
+    {
+      "id": "technical.favicon.missing",
+      "category": "technical",
+      "severity": "info",
+      "passed": false,
+      "evidence": {
+        "href": null
+      }
+    },
+    {
+      "id": "seo.noindex",
+      "category": "seo",
+      "severity": "critical",
+      "passed": true,
+      "evidence": {
+        "sources": []
+      }
+    },
+    {
+      "id": "seo.title.missing",
+      "category": "seo",
+      "severity": "critical",
+      "passed": true,
+      "evidence": {
+        "title": "Plumbing in Lyon"
+      }
+    },
+    {
+      "id": "technical.https.missing",
+      "category": "technical",
+      "severity": "critical",
+      "passed": true,
+      "evidence": {
+        "finalUrl": "https://rosas-bakery.example/"
+      }
+    },
+    {
+      "id": "technical.status.error",
+      "category": "technical",
+      "severity": "critical",
+      "passed": true,
+      "evidence": {
+        "status": 200
+      }
+    },
+    {
+      "id": "performance.server.slow",
+      "category": "performance",
+      "severity": "warning",
+      "passed": true,
+      "evidence": {
+        "metric": "TTFB",
+        "value": 135,
+        "unit": "ms",
+        "goodThreshold": 600,
+        "source": "lab",
+        "displayValue": "Root document took 140 ms",
+        "field": {
+          "metric": "TTFB",
+          "value": 1090,
+          "category": "AVERAGE"
+        }
+      }
+    },
+    {
+      "id": "accessibility.button-name.missing",
+      "category": "accessibility",
+      "severity": "warning",
+      "passed": true
+    },
+    {
+      "id": "accessibility.form-label.missing",
+      "category": "accessibility",
+      "severity": "warning",
+      "passed": true
+    },
+    {
+      "id": "accessibility.img-alt.missing",
+      "category": "accessibility",
+      "severity": "warning",
+      "passed": true
+    },
+    {
+      "id": "accessibility.link-name.missing",
+      "category": "accessibility",
+      "severity": "warning",
+      "passed": true
+    },
+    {
+      "id": "seo.h1.missing",
+      "category": "seo",
+      "severity": "warning",
+      "passed": true,
+      "evidence": {
+        "count": 1,
+        "h1": [
+          "Plumbing in Lyon"
+        ]
+      }
+    },
+    {
+      "id": "seo.title.too-short",
+      "category": "seo",
+      "severity": "warning",
+      "passed": true,
+      "evidence": {
+        "title": "Plumbing in Lyon",
+        "length": 16,
+        "min": 10
+      }
+    },
+    {
+      "id": "technical.mixed-content",
+      "category": "technical",
+      "severity": "warning",
+      "passed": true,
+      "evidence": {
+        "count": 0,
+        "examples": []
+      }
+    },
+    {
+      "id": "technical.redirects.too-many",
+      "category": "technical",
+      "severity": "warning",
+      "passed": true,
+      "evidence": {
+        "count": 0,
+        "chain": [
+          "https://rosas-bakery.example/"
+        ]
+      }
+    },
+    {
+      "id": "technical.sitemap.missing",
+      "category": "technical",
+      "severity": "warning",
+      "passed": true,
+      "evidence": {
+        "status": 200
+      }
+    },
+    {
+      "id": "performance.cls.high",
+      "category": "performance",
+      "severity": "warning",
+      "passed": true,
+      "evidence": {
+        "metric": "CLS",
+        "value": 0,
+        "unit": "unitless",
+        "goodThreshold": 0.1,
+        "source": "lab",
+        "displayValue": "0",
+        "field": {
+          "metric": "CLS",
+          "value": 0.01,
+          "category": "FAST"
+        }
+      }
+    },
+    {
+      "id": "accessibility.lang.missing",
+      "category": "accessibility",
+      "severity": "warning",
+      "passed": true,
+      "evidence": {
+        "lang": "en-US"
+      }
+    },
+    {
+      "id": "technical.robots-txt.missing",
+      "category": "technical",
+      "severity": "warning",
+      "passed": true,
+      "evidence": {
+        "status": 200
+      }
+    },
+    {
+      "id": "performance.text-compression",
+      "category": "performance",
+      "severity": "info",
+      "passed": true
+    },
+    {
+      "id": "performance.caching",
+      "category": "performance",
+      "severity": "info",
+      "passed": true
+    },
+    {
+      "id": "seo.h1.multiple",
+      "category": "seo",
+      "severity": "info",
+      "passed": true,
+      "evidence": {
+        "count": 1,
+        "h1": [
+          "Plumbing in Lyon"
+        ]
+      }
+    },
+    {
+      "id": "seo.headings.skipped-level",
+      "category": "seo",
+      "severity": "info",
+      "passed": true
+    },
+    {
+      "id": "seo.title.too-long",
+      "category": "seo",
+      "severity": "info",
+      "passed": true,
+      "evidence": {
+        "title": "Plumbing in Lyon",
+        "length": 16,
+        "max": 60
+      }
+    },
+    {
+      "id": "technical.headers.content-type-options.missing",
+      "category": "technical",
+      "severity": "info",
+      "passed": true,
+      "evidence": {
+        "value": "nosniff"
+      }
+    },
+    {
+      "id": "technical.headers.frame-options.missing",
+      "category": "technical",
+      "severity": "info",
+      "passed": true,
+      "evidence": {
+        "value": "SAMEORIGIN",
+        "cspFrameAncestors": false
+      }
+    },
+    {
+      "id": "technical.headers.hsts.missing",
+      "category": "technical",
+      "severity": "info",
+      "passed": true,
+      "evidence": {
+        "value": "max-age=31536000; includeSubDomains"
+      }
+    },
+    {
+      "id": "technical.headers.csp.missing",
+      "category": "technical",
+      "severity": "info",
+      "passed": true,
+      "evidence": {
+        "value": "default-src 'self'"
+      }
+    }
+  ],
+  "platform": {
+    "name": "wordpress",
+    "confidence": "high"
+  },
+  "localChecks": false
+}

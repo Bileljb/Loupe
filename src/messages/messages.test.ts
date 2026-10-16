@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { routing } from "@/i18n/routing";
-import { fetchErrorCodes } from "@/lib/security/errors";
+import { auditErrorCodes } from "@/lib/audit/events";
 import en from "./en.json";
 import fr from "./fr.json";
 import ar from "./ar.json";
@@ -25,7 +25,7 @@ describe("messages", () => {
     expect(flattenKeys(messagesByLocale[locale]).sort()).toEqual(englishKeys);
   });
 
-  it.each(fetchErrorCodes)("has a friendly message for error code %s", (code) => {
+  it.each(auditErrorCodes)("has a friendly message for error code %s", (code) => {
     expect(englishKeys).toContain(`Errors.${code}`);
   });
 });

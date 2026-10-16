@@ -9,7 +9,31 @@
   "HomePage": {
     "title": "Votre site aide-t-il ou freine-t-il votre activité ?",
     "intro": "Saisissez l'adresse de votre page d'accueil et recevez un rapport clair : ce qui ne va pas, pourquoi c'est important et quoi corriger en premier.",
-    "scope": "Nous vérifions une seule page (votre page d'accueil), ainsi que vos fichiers robots.txt et sitemap."
+    "scope": "Nous vérifions une seule page (votre page d'accueil), ainsi que vos fichiers robots.txt et sitemap.",
+    "trust": "Gratuit, sans inscription. Des vérifications automatiques, pas un audit complet.",
+    "exampleLink": "Voir un exemple de rapport"
+  },
+  "AuditForm": {
+    "urlLabel": "L'adresse de votre site",
+    "urlPlaceholder": "exemple.fr",
+    "localLabel": "J'ai une clientèle locale",
+    "localHint": "Ajoute des vérifications pour votre adresse, votre numéro de téléphone, vos horaires et votre carte.",
+    "submit": "Vérifier mon site",
+    "submitting": "Vérification...",
+    "progressTitle": "Vérification de votre site",
+    "duration": "Cela prend généralement entre 20 et 60 secondes.",
+    "stages": {
+      "performance": "Test de la vitesse sur téléphone",
+      "page": "Vérification de la visibilité, de l'accessibilité et des bases techniques",
+      "saving": "Préparation de votre rapport"
+    },
+    "status": {
+      "pending": "En attente",
+      "running": "En cours",
+      "done": "Terminé",
+      "failed": "Cette étape n'a pas pu aboutir"
+    },
+    "errorTitle": "Nous n'avons pas pu vérifier ce site"
   },
   "LocaleSwitcher": {
     "label": "Langue"
@@ -18,8 +42,18 @@
     "title": "Rapport du site {host}",
     "loading": "Chargement de votre rapport...",
     "checkedOn": "Vérifié le {date}",
+    "scope": "Nous avons vérifié une seule page (la page d'accueil), ainsi que ses fichiers robots.txt et sitemap. Ce sont des vérifications automatiques, pas un audit complet.",
+    "exampleNotice": "Ceci est un exemple de rapport pour le site d'une boulangerie imaginaire. Vérifiez votre propre site pour obtenir le vôtre.",
+    "exampleCta": "Vérifier mon site",
     "grade": "Note {grade}",
     "overall": "Score global : {score} sur 100",
+    "gradeSummary": {
+      "A": "Votre site est en excellente forme.",
+      "B": "Votre site est en bonne forme, avec quelques points à améliorer.",
+      "C": "Votre site fonctionne, mais certains problèmes vous font perdre des visiteurs.",
+      "D": "Votre site a des problèmes qui vous font probablement perdre des clients.",
+      "F": "Votre site a des problèmes sérieux. Commencez par la liste ci-dessous."
+    },
     "categoriesTitle": "Scores par domaine",
     "categories": {
       "performance": "Vitesse sur mobile",
@@ -29,12 +63,115 @@
     },
     "score": "{score} sur 100",
     "notChecked": "Non vérifié",
-    "expires": "Ce lien fonctionne jusqu'au {date}. Ensuite, le rapport est supprimé."
+    "expires": "Ce lien fonctionne jusqu'au {date}. Ensuite, le rapport est supprimé.",
+    "actions": {
+      "copyLink": "Copier le lien",
+      "copied": "Lien copié",
+      "copyFailed": "Copie impossible. Copiez plutôt l'adresse depuis la barre de votre navigateur.",
+      "technicalView": "Vue technique",
+      "technicalViewHint": "Afficher les détails pour les développeurs sur chaque problème"
+    },
+    "banners": {
+      "psiFailedTitle": "La vitesse n'a pas été mesurée",
+      "psiFailed": "Le test de vitesse de Google n'a pas répondu cette fois, donc la vitesse manque dans votre score. Les autres vérifications sont complètes. Réessayez un peu plus tard.",
+      "htmlFailedTitle": "Nous n'avons pas pu lire votre page",
+      "htmlFailed": "Les vérifications de visibilité, d'accessibilité et techniques manquent. Les résultats de vitesse viennent du test de Google.",
+      "jsShellTitle": "Certains résultats peuvent être incomplets",
+      "jsShell": "Votre page semble construire son contenu dans le navigateur du visiteur. Nous lisons la page telle qu'elle est envoyée au départ, donc une partie du contenu a pu nous échapper.",
+      "blockedTitle": "Votre site a refusé notre visite",
+      "blocked": "Votre site a répondu par une erreur (code {status}). Il bloque peut-être les outils automatiques comme le nôtre. Les résultats portent sur la page qui nous a été montrée.",
+      "platform": "Ce site semble fonctionner avec {platform}, nous avons donc ajouté les étapes pour {platform} quand nous les avons."
+    },
+    "vitals": {
+      "title": "La vitesse sur mobile, en clair",
+      "source": "Mesuré par Google sur un téléphone simulé. Les vraies visites peuvent être plus rapides ou plus lentes.",
+      "lcp": "Le contenu principal s'affiche",
+      "fcp": "Le premier élément s'affiche",
+      "ttfb": "Le serveur commence à répondre",
+      "cls": "La page reste stable pendant le chargement",
+      "interactivity": "Réagit vite au toucher",
+      "seconds": "{value} s",
+      "good": "Bien",
+      "needsWork": "À améliorer"
+    },
+    "fixFirst": {
+      "title": "À corriger en premier",
+      "intro": "Les plus gros gains pour le moins d'effort.",
+      "none": "Rien à corriger pour l'instant. Bravo !",
+      "details": "Comment corriger"
+    },
+    "groups": {
+      "title": "Tout ce que nous avons trouvé",
+      "critical": "Urgent",
+      "warning": "Important",
+      "info": "Mineur",
+      "count": "Nombre de problèmes"
+    },
+    "passed": {
+      "title": "Ce qui fonctionne",
+      "intro": "Vérifications réussies dans chaque domaine."
+    },
+    "severity": {
+      "critical": "Urgent",
+      "warning": "Important",
+      "info": "Mineur"
+    },
+    "effort": {
+      "low": "Correction rapide",
+      "medium": "Un peu de travail",
+      "high": "Gros chantier"
+    },
+    "impact": {
+      "low": "Faible impact",
+      "medium": "Impact moyen",
+      "high": "Fort impact"
+    },
+    "issue": {
+      "what": "Ce que nous avons trouvé",
+      "why": "Pourquoi c'est important",
+      "howToFix": "Comment corriger",
+      "platformSteps": "Étapes pour {platform}",
+      "generalFix": "En général",
+      "devDetails": "Détails pour les développeurs",
+      "checkId": "Identifiant de la vérification",
+      "evidence": "Ce que nous avons mesuré",
+      "example": "Exemple de code"
+    },
+    "developer": {
+      "title": "Envoyer à mon développeur",
+      "intro": "Copiez une liste de tâches prête à l'emploi, avec les détails techniques dont votre développeur ou votre agence a besoin.",
+      "language": "Langue du message",
+      "copy": "Copier le message",
+      "copied": "Message copié",
+      "copyFailed": "Copie impossible. Sélectionnez le texte ci-dessous et copiez-le vous-même.",
+      "preview": "Voir le message",
+      "messageLabel": "Message pour votre développeur"
+    }
+  },
+  "DeveloperMessage": {
+    "heading": "Corrections à faire sur {url}",
+    "checkedOn": "Vérifié le {date} avec {tool} : vérifications automatiques d'une seule page, pas un audit complet.",
+    "report": "Rapport complet : {link}",
+    "platform": "Plateforme (détectée, peut être erronée) : {platform}",
+    "groups": {
+      "critical": "Critique",
+      "warning": "Avertissement",
+      "info": "Mineur"
+    },
+    "fix": "Correction",
+    "evidence": "Constat",
+    "example": "Exemple",
+    "none": "Aucune vérification échouée."
   },
   "ReportNotFound": {
     "title": "Ce rapport n'est pas disponible",
     "body": "Le lien est peut-être erroné, ou le rapport a expiré. Les rapports sont conservés {days} jours.",
     "cta": "Vérifier un site"
+  },
+  "ReportError": {
+    "title": "Nous n'avons pas pu charger ce rapport",
+    "body": "Un problème est survenu de notre côté. Réessayez dans un instant.",
+    "retry": "Réessayer"
   },
   "Errors": {
     "INVALID_URL": "Cela ne ressemble pas à une adresse de site web. Essayez par exemple exemple.com.",
@@ -43,6 +180,7 @@
     "NOT_HTML": "Cette adresse ne mène pas à une page web. Saisissez l'adresse de votre page d'accueil.",
     "TOO_LARGE": "Cette page est trop volumineuse pour être vérifiée.",
     "UNREACHABLE": "Nous n'avons pas pu joindre ce site. Vérifiez l'adresse et que le site est bien en ligne.",
-    "TOO_MANY_REDIRECTS": "Cette adresse renvoie les visiteurs vers trop d'autres adresses. Vérifiez qu'elle mène bien à votre page d'accueil."
+    "TOO_MANY_REDIRECTS": "Cette adresse renvoie les visiteurs vers trop d'autres adresses. Vérifiez qu'elle mène bien à votre page d'accueil.",
+    "SERVER_ERROR": "Un problème est survenu de notre côté. Réessayez dans un instant."
   }
 }

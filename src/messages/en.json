@@ -9,7 +9,31 @@
   "HomePage": {
     "title": "Is your website helping or hurting your business?",
     "intro": "Enter your homepage address and get a clear report: what is wrong, why it matters, and what to fix first.",
-    "scope": "We check one page (your homepage) plus your robots.txt and sitemap files."
+    "scope": "We check one page (your homepage) plus your robots.txt and sitemap files.",
+    "trust": "Free, no sign-up. Automated checks, not a full audit.",
+    "exampleLink": "See an example report"
+  },
+  "AuditForm": {
+    "urlLabel": "Your website address",
+    "urlPlaceholder": "example.com",
+    "localLabel": "I serve local customers",
+    "localHint": "Adds checks for your address, phone number, opening hours and map.",
+    "submit": "Check my website",
+    "submitting": "Checking...",
+    "progressTitle": "Checking your website",
+    "duration": "This usually takes 20 to 60 seconds.",
+    "stages": {
+      "performance": "Testing speed on a phone",
+      "page": "Checking search, accessibility and technical basics",
+      "saving": "Preparing your report"
+    },
+    "status": {
+      "pending": "Waiting",
+      "running": "In progress",
+      "done": "Done",
+      "failed": "Couldn't finish this step"
+    },
+    "errorTitle": "We couldn't check this website"
   },
   "LocaleSwitcher": {
     "label": "Language"
@@ -18,8 +42,18 @@
     "title": "Website report for {host}",
     "loading": "Loading your report...",
     "checkedOn": "Checked on {date}",
+    "scope": "We checked one page (the homepage) plus its robots.txt and sitemap files. These are automated checks, not a full audit.",
+    "exampleNotice": "This is an example report for a made-up bakery website. Check your own site to get yours.",
+    "exampleCta": "Check my website",
     "grade": "Grade {grade}",
     "overall": "Overall score: {score} out of 100",
+    "gradeSummary": {
+      "A": "Your website is in great shape.",
+      "B": "Your website is in good shape, with a few things to improve.",
+      "C": "Your website works, but some problems are costing you visitors.",
+      "D": "Your website has problems that are likely costing you customers.",
+      "F": "Your website has serious problems. Start with the list below."
+    },
     "categoriesTitle": "Scores by area",
     "categories": {
       "performance": "Speed on phones",
@@ -29,12 +63,115 @@
     },
     "score": "{score} out of 100",
     "notChecked": "Not checked",
-    "expires": "This report link works until {date}. After that, the report is deleted."
+    "expires": "This report link works until {date}. After that, the report is deleted.",
+    "actions": {
+      "copyLink": "Copy link",
+      "copied": "Link copied",
+      "copyFailed": "Couldn't copy. Copy the address from your browser bar instead.",
+      "technicalView": "Technical view",
+      "technicalViewHint": "Show developer details for every issue"
+    },
+    "banners": {
+      "psiFailedTitle": "Speed wasn't measured",
+      "psiFailed": "Google's speed test didn't answer this time, so speed is missing from your score. The other checks are complete. Try again in a little while.",
+      "htmlFailedTitle": "We couldn't read your page",
+      "htmlFailed": "Search, accessibility and technical checks are missing. The speed results come from Google's test.",
+      "jsShellTitle": "Some results may be incomplete",
+      "jsShell": "Your page seems to build its content in the visitor's browser. We read the page as it is first sent, so we may have missed some of its content.",
+      "blockedTitle": "Your website turned our visit away",
+      "blocked": "Your website answered with an error (code {status}). It may block automated tools like ours. The results are based on the page we were shown.",
+      "platform": "This looks like a {platform} site, so we added {platform} steps where we have them."
+    },
+    "vitals": {
+      "title": "Speed on phones, in plain words",
+      "source": "Measured by Google on a simulated phone. Real visits can be faster or slower.",
+      "lcp": "Main content appears",
+      "fcp": "First thing appears on screen",
+      "ttfb": "Server starts answering",
+      "cls": "Page stays steady while loading",
+      "interactivity": "Responds quickly to taps",
+      "seconds": "{value} s",
+      "good": "Good",
+      "needsWork": "Needs work"
+    },
+    "fixFirst": {
+      "title": "Fix these first",
+      "intro": "The biggest wins for the least effort.",
+      "none": "Nothing to fix right now. Nice work!",
+      "details": "How to fix it"
+    },
+    "groups": {
+      "title": "Everything we found",
+      "critical": "Urgent",
+      "warning": "Important",
+      "info": "Minor",
+      "count": "Number of issues"
+    },
+    "passed": {
+      "title": "What's working",
+      "intro": "Checks passed in each area."
+    },
+    "severity": {
+      "critical": "Urgent",
+      "warning": "Important",
+      "info": "Minor"
+    },
+    "effort": {
+      "low": "Quick fix",
+      "medium": "Some work",
+      "high": "Bigger job"
+    },
+    "impact": {
+      "low": "Small impact",
+      "medium": "Medium impact",
+      "high": "Big impact"
+    },
+    "issue": {
+      "what": "What we found",
+      "why": "Why it matters",
+      "howToFix": "How to fix it",
+      "platformSteps": "Steps for {platform}",
+      "generalFix": "In general",
+      "devDetails": "Developer details",
+      "checkId": "Check id",
+      "evidence": "What we measured",
+      "example": "Example code"
+    },
+    "developer": {
+      "title": "Send to my developer",
+      "intro": "Copy a ready-made to-do list with the technical details your developer or agency needs.",
+      "language": "Message language",
+      "copy": "Copy message",
+      "copied": "Message copied",
+      "copyFailed": "Couldn't copy. Select the text below and copy it yourself.",
+      "preview": "Preview the message",
+      "messageLabel": "Message for your developer"
+    }
+  },
+  "DeveloperMessage": {
+    "heading": "Website fixes for {url}",
+    "checkedOn": "Checked on {date} with {tool}: automated checks of one page, not a full audit.",
+    "report": "Full report: {link}",
+    "platform": "Platform (detected, may be wrong): {platform}",
+    "groups": {
+      "critical": "Critical",
+      "warning": "Warning",
+      "info": "Minor"
+    },
+    "fix": "Fix",
+    "evidence": "Evidence",
+    "example": "Example",
+    "none": "No failed checks."
   },
   "ReportNotFound": {
     "title": "This report isn't available",
     "body": "The link may be wrong, or the report has expired. Reports are kept for {days} days.",
     "cta": "Check a website"
+  },
+  "ReportError": {
+    "title": "We couldn't load this report",
+    "body": "Something went wrong on our side. Please try again in a moment.",
+    "retry": "Try again"
   },
   "Errors": {
     "INVALID_URL": "That doesn't look like a website address. Try something like example.com.",
@@ -43,6 +180,7 @@
     "NOT_HTML": "This address doesn't lead to a web page. Enter the address of your homepage.",
     "TOO_LARGE": "This page is too big for us to check.",
     "UNREACHABLE": "We couldn't reach this website. Check the address and make sure the site is online.",
-    "TOO_MANY_REDIRECTS": "This address sends visitors through too many other addresses. Check that it leads to your homepage."
+    "TOO_MANY_REDIRECTS": "This address sends visitors through too many other addresses. Check that it leads to your homepage.",
+    "SERVER_ERROR": "Something went wrong on our side. Please try again in a moment."
   }
 }

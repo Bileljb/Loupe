@@ -342,22 +342,24 @@ Note: `reports.ts` holds all the logic over a tiny `KeyValueStore` (`get`, `set`
 
 ## Phase 7: API route and report UI
 
-- [ ] `POST /api/audit`: validate, run audit, stream progress events (NDJSON), return report id; set `maxDuration`
-- [ ] Landing page: URL form, "I serve local customers" checkbox, single-page-audit notice, example report link
-- [ ] Loading state with real stages (checking performance, SEO, accessibility...)
-- [ ] Report dashboard: letter grade, overall score, score rings per category, Core Web Vitals (in plain words), issues grouped by priority
-- [ ] "Fix these first" card (top 3 by impact desc, effort asc)
-- [ ] Issue cards: What / Why it matters (with business impact) / How to fix, effort and impact badges, collapsible "developer details" (snippet and evidence)
-- [ ] Platform-aware fix steps with a "Looks like WordPress" note and a generic-fix fallback
-- [ ] "Send to my developer" button: generates and copies a grouped technical message client-side (current language, with an English option)
-- [ ] "Technical view" toggle that expands all developer details (off by default, remembered per viewer)
-- [ ] Language switcher (EN / FR / AR) in the header; stays on the same page; works on report pages
-- [ ] All UI strings come from `messages/*.json` (no hardcoded text); report content comes from the locale's KB
-- [ ] Full RTL pass: layout, icons, score rings, progress stages, forms, and the compare view in Arabic
-- [ ] Dark mode, reduced-motion support, mobile-first layout
-- [ ] Banners for partial results, JS-rendered sites, and blocked sites
-- [ ] Error states: invalid URL, blocked URL, site unreachable/403, PSI quota, timeout
-- [ ] Copy-link button; responsive layout; keyboard navigation and focus states (the tool must pass its own accessibility checks)
+- [x] `POST /api/audit`: validate, run audit, stream progress events (NDJSON), return report id; set `maxDuration`
+- [x] Landing page: URL form, "I serve local customers" checkbox, single-page-audit notice, example report link
+- [x] Loading state with real stages (checking performance, SEO, accessibility...)
+- [x] Report dashboard: letter grade, overall score, score rings per category, Core Web Vitals (in plain words), issues grouped by priority
+- [x] "Fix these first" card (top 3 by impact desc, effort asc)
+- [x] Issue cards: What / Why it matters (with business impact) / How to fix, effort and impact badges, collapsible "developer details" (snippet and evidence)
+- [x] Platform-aware fix steps with a "Looks like WordPress" note and a generic-fix fallback
+- [x] "Send to my developer" button: generates and copies a grouped technical message client-side (current language, with an English option)
+- [x] "Technical view" toggle that expands all developer details (off by default, remembered per viewer)
+- [x] Language switcher (EN / FR / AR) in the header; stays on the same page; works on report pages
+- [x] All UI strings come from `messages/*.json` (no hardcoded text); report content comes from the locale's KB
+- [ ] Full RTL pass: layout, icons, score rings, progress stages, forms, and the compare view in Arabic (all done except the compare view, which arrives in Phase 8)
+- [x] Dark mode, reduced-motion support, mobile-first layout
+- [x] Banners for partial results, JS-rendered sites, and blocked sites
+- [x] Error states: invalid URL, blocked URL, site unreachable/403, PSI quota, timeout
+- [ ] Copy-link button; responsive layout; keyboard navigation and focus states (the tool must pass its own accessibility checks): all built; running our own audit on the app needs a public URL (Phase 10/11)
+
+Note: the stream sends `started`, `stage`, then `done` (report id, `cached`) or `error` (code only); event types and the NDJSON reader live in `lib/audit/events.ts` (no Zod, so the landing page stays light). Codes are `FetchErrorCode` plus `SERVER_ERROR` (storage down, unexpected errors, dropped stream). A PSI quota or timeout is not an error: it gives a partial report with a banner. "Blocked" means the site answered with an error status (e.g. 403); the banner reads `technical.status.error` evidence. Dark mode follows the system setting (`prefers-color-scheme`), with no `next-themes` and no toggle; add one later if wanted. `/report/example` renders a fixed report (`lib/report/exampleReport.json`, built from the WordPress fixtures) that never expires. Platform steps are used only for high/medium confidence. "What's working" shows passed-check counts per area, because KB titles describe problems. The developer message is built on the server for the current language and English, then copied on the client: no extra request and no AI. Issue cards don't link to guides yet (no broken links until Phase 10 builds them). Report HTML is about 200 KB uncompressed (KB text plus two developer messages); revisit in Phase 10 if Lighthouse complains. On Windows, the Tailwind dev worker can fail to start when `next dev` runs from a detached shell (`0xc0000142`); `next build && next start` works.
 
 **Done when:** full flow works end to end locally, including every error state.
 
