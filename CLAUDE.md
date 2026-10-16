@@ -251,7 +251,7 @@ Server-side fetching of user-supplied URLs is an SSRF risk.
 - [x] Add scripts: `test`, `typecheck`, `lint`
 - [x] Create the folder structure above
 - [x] Get a PageSpeed Insights API key (Google Cloud Console), restricted to the PSI API
-- [ ] Create a free Upstash Redis database (needed from Phase 6); fill `.env.local`
+- [x] Create a free Upstash Redis database (needed from Phase 6); fill `.env.local`
 - [x] Create `lib/siteConfig.ts` (name, tagline, URL) and use it everywhere instead of hardcoding the brand
 
 **Done when:** app runs locally, `npm run typecheck` and `npm test` pass on an empty suite.
@@ -330,11 +330,13 @@ Note: category scores are `null` when that category could not be checked (PSI or
 
 ## Phase 6: Storage and sharing
 
-- [ ] `storage/reports.ts` interface + Upstash implementation
-- [ ] Generate random report id; save with TTL
-- [ ] `getReport` validates with Zod and handles unknown `schemaVersion`
-- [ ] URL-hash result cache (1h) to protect PSI quota
-- [ ] `/report/[id]` page: loads report, 404 state for missing/expired, "expires on" notice
+- [x] `storage/reports.ts` interface + Upstash implementation
+- [x] Generate random report id; save with TTL
+- [x] `getReport` validates with Zod and handles unknown `schemaVersion`
+- [x] URL-hash result cache (1h) to protect PSI quota
+- [x] `/report/[id]` page: loads report, 404 state for missing/expired, "expires on" notice
+
+Note: `reports.ts` holds all the logic over a tiny `KeyValueStore` (`get`, `set` with TTL); `redis.ts` only implements that store, and tests use `createMemoryStore`. `getReport` returns `found`, `not_found` (missing, expired, damaged or malformed id) or `unsupported_version`. The expiry date is `createdAt + REPORT_TTL_DAYS`, so there is no extra field. `audit/auditAndSave.ts` wraps `runAudit` with the cache and the save: the cache stores only a report id; partial reports and re-scans are not cached; cache errors never fail an audit, but a failed save does. The report page is minimal (the full dashboard is Phase 7) and has static `noindex, nofollow`. With `cacheComponents`, the report loads inside `<Suspense>`, so a missing report streams the not-found page with status 200 plus `noindex` instead of a real 404; a true 404 would need a Redis lookup in `proxy.ts`. The header `LocaleSwitcher` now renders inside `<Suspense>` (fallback `LocaleLinks`), because `usePathname()` is request-time data on dynamic routes. The live Upstash test runs only with `RUN_REDIS_TESTS=1` (see `storage/redis.test.ts`).
 
 **Done when:** an audit produces a link that opens the same report in another browser, and expired/missing ids show a friendly page.
 

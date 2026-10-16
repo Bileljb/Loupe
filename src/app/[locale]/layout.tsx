@@ -3,7 +3,8 @@ import { Geist, Geist_Mono, Noto_Sans_Arabic } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getTranslations } from "next-intl/server";
 import { DirectionProvider } from "@/components/ui/direction";
-import { LocaleSwitcher } from "@/components/LocaleSwitcher";
+import { Suspense } from "react";
+import { LocaleLinks, LocaleSwitcher } from "@/components/LocaleSwitcher";
 import { getDirection, routing } from "@/i18n/routing";
 import { siteConfig } from "@/lib/siteConfig";
 import "../globals.css";
@@ -53,7 +54,9 @@ export default async function LocaleLayout({ children }: LayoutProps<"/[locale]"
           <DirectionProvider direction={dir}>
             <header className="flex items-center justify-between gap-4 px-6 py-4">
               <span className="font-semibold">{siteConfig.name}</span>
-              <LocaleSwitcher />
+              <Suspense fallback={<LocaleLinks />}>
+                <LocaleSwitcher />
+              </Suspense>
             </header>
             {children}
           </DirectionProvider>

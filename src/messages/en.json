@@ -14,6 +14,28 @@
   "LocaleSwitcher": {
     "label": "Language"
   },
+  "Report": {
+    "title": "Website report for {host}",
+    "loading": "Loading your report...",
+    "checkedOn": "Checked on {date}",
+    "grade": "Grade {grade}",
+    "overall": "Overall score: {score} out of 100",
+    "categoriesTitle": "Scores by area",
+    "categories": {
+      "performance": "Speed on phones",
+      "seo": "Showing up in search",
+      "accessibility": "Easy for everyone to use",
+      "technical": "Technical health"
+    },
+    "score": "{score} out of 100",
+    "notChecked": "Not checked",
+    "expires": "This report link works until {date}. After that, the report is deleted."
+  },
+  "ReportNotFound": {
+    "title": "This report isn't available",
+    "body": "The link may be wrong, or the report has expired. Reports are kept for {days} days.",
+    "cta": "Check a website"
+  },
   "Errors": {
     "INVALID_URL": "That doesn't look like a website address. Try something like example.com.",
     "BLOCKED": "We can't check this address. Only public websites can be checked.",

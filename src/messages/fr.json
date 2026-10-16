@@ -14,6 +14,28 @@
   "LocaleSwitcher": {
     "label": "Langue"
   },
+  "Report": {
+    "title": "Rapport du site {host}",
+    "loading": "Chargement de votre rapport...",
+    "checkedOn": "Vérifié le {date}",
+    "grade": "Note {grade}",
+    "overall": "Score global : {score} sur 100",
+    "categoriesTitle": "Scores par domaine",
+    "categories": {
+      "performance": "Vitesse sur mobile",
+      "seo": "Visibilité dans les recherches",
+      "accessibility": "Facile à utiliser pour tous",
+      "technical": "Santé technique"
+    },
+    "score": "{score} sur 100",
+    "notChecked": "Non vérifié",
+    "expires": "Ce lien fonctionne jusqu'au {date}. Ensuite, le rapport est supprimé."
+  },
+  "ReportNotFound": {
+    "title": "Ce rapport n'est pas disponible",
+    "body": "Le lien est peut-être erroné, ou le rapport a expiré. Les rapports sont conservés {days} jours.",
+    "cta": "Vérifier un site"
+  },
   "Errors": {
     "INVALID_URL": "Cela ne ressemble pas à une adresse de site web. Essayez par exemple exemple.com.",
     "BLOCKED": "Nous ne pouvons pas vérifier cette adresse. Seuls les sites web publics peuvent être vérifiés.",

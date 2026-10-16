@@ -1,7 +1,7 @@
 import { randomBytes } from "node:crypto";
 import { runHtmlChecks, type PageSnapshot, type SiteFile } from "@/lib/checks";
 import { mapPsiResult, type PsiResult } from "@/lib/checks/psi";
-import { auditInputSchema, reportSchema, type Issue, type Report } from "@/lib/schemas";
+import { auditInputSchema, reportSchema, type AuditInput, type Issue, type Report } from "@/lib/schemas";
 import { computeScores, sortIssues } from "@/lib/scoring/score";
 import { FetchError, fetchErrorCodes, type FetchErrorCode } from "@/lib/security/errors";
 import { safeFetch } from "@/lib/security/safeFetch";
@@ -74,6 +74,16 @@ function isFetchErrorCode(value: string): value is FetchErrorCode {
   return (fetchErrorCodes as readonly string[]).includes(value);
 }
 
+/** Validates and normalizes request input. Throws FetchError with a translatable code. */
+export function parseAuditInput(input: { url: string; localChecks?: boolean }): AuditInput {
+  const parsed = auditInputSchema.safeParse(input);
+  if (!parsed.success) {
+    const message = parsed.error.issues[0]?.message ?? "";
+    throw new FetchError(isFetchErrorCode(message) ? message : "INVALID_URL");
+  }
+  return parsed.data;
+}
+
 /** One issue per id. If two sources report the same id, a failure wins over a pass. */
 export function mergeIssues(...sources: Issue[][]): Issue[] {
   const byId = new Map<string, Issue>();
@@ -96,12 +106,7 @@ export async function runAudit(
   const deps = { ...defaultDeps, ...options.deps };
   const emit = options.onProgress ?? (() => {});
 
-  const parsed = auditInputSchema.safeParse(input);
-  if (!parsed.success) {
-    const message = parsed.error.issues[0]?.message ?? "";
-    throw new FetchError(isFetchErrorCode(message) ? message : "INVALID_URL");
-  }
-  const { url, localChecks } = parsed.data;
+  const { url, localChecks } = parseAuditInput(input);
 
   // Reject private and reserved addresses before anything (including Google) is asked to visit them.
   await deps.validate(new URL(url));
