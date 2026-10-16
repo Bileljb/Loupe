@@ -377,12 +377,14 @@ Note: the API takes `rescanOf: <id>`; `auditAndSave` loads that report and re-au
 
 ## Phase 9: Hardening
 
-- [ ] Rate limiting per IP (Upstash Ratelimit) with a clear "try again in X" message
-- [ ] Global daily cap for PSI requests
-- [ ] Audit all rendered evidence for XSS safety
-- [ ] Add security headers to the app itself
-- [ ] Basic logging for failures (no sensitive data); optional Sentry
-- [ ] Manual test set: SPA site, site behind Cloudflare, very slow site, redirect-heavy site, non-HTML URL, huge page
+- [x] Rate limiting per IP (Upstash Ratelimit) with a clear "try again in X" message
+- [x] Global daily cap for PSI requests
+- [x] Audit all rendered evidence for XSS safety
+- [x] Add security headers to the app itself
+- [x] Basic logging for failures (no sensitive data); optional Sentry (Sentry not added)
+- [x] Manual test set: SPA site, site behind Cloudflare, very slow site, redirect-heavy site, non-HTML URL, huge page
+
+Note: limiters live in `storage/redis.ts` (`createRedisLimiter`, which fails open if Redis is down) behind the `Limiter` interface in `security/rateLimit.ts`; `audit/limits.ts` builds them. Per visitor: a sliding window of `AUDITS_PER_HOUR` (default 5), counting every audit request including re-scans and cached results; keys are a sha256 of the IP, never the raw address. Over the limit, the API returns 429 with `Retry-After` and a `RATE_LIMITED` event carrying `retryAfter`, and the UI says "try again in X min". Global: a fixed daily window of `PSI_DAILY_CAP` (default 1000, far below Google's 25,000/day), checked through `runAudit`'s `allowPsi` gate only when PSI would actually run. When it's spent, audits still complete as partial reports with no speed score. The IP comes from the first `X-Forwarded-For` entry: confirm on Vercel (Phase 11) that the platform overwrites this header, or switch to Vercel's IP helper. CSP has no nonces (they would make every page dynamic): `script-src 'self' 'unsafe-inline'`, no third-party origins, `frame-ancestors 'none'`; Phase 12 analytics will need its origin added. `security/xss.test.ts` fails the build if any raw-HTML sink appears (JSON-LD in Phase 10 needs a reviewed exception). Logs are one JSON line per event (`lib/log.ts`): codes and flags only, no URLs, IPs or ids. Manual set (2026-10-16): excalidraw.com gave a report with the JS banner; g2.com gave a report with the 403 and speed banners; httpbin `/delay/15` gave TIMEOUT; httpbingo `/redirect/8` gave TOO_MANY_REDIRECTS (httpbin's own redirects are so slow they hit TIMEOUT first); `/json` gave NOT_HTML; the WHATWG spec gave TOO_LARGE; a seeded `</script><img onerror>` evidence value was escaped in both the HTML and the inline data.
 
 **Done when:** abuse attempts are blocked and every manual test case gives a clean result or a clear message.
 

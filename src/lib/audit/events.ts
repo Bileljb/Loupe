@@ -3,14 +3,15 @@ import { fetchErrorCodes } from "@/lib/security/errors";
 import type { AuditProgress, AuditStage } from "./runAudit";
 
 /** Every error the client can be told about. Each maps to Errors.<code> in messages/*.json. */
-export const auditErrorCodes = [...fetchErrorCodes, "SERVER_ERROR"] as const;
+export const auditErrorCodes = [...fetchErrorCodes, "RATE_LIMITED", "SERVER_ERROR"] as const;
 export type AuditErrorCode = (typeof auditErrorCodes)[number];
 
 /** One JSON object per line (NDJSON) on the POST /api/audit response. */
 export type AuditStreamEvent =
   | AuditProgress
   | { type: "done"; id: string; cached: boolean }
-  | { type: "error"; code: AuditErrorCode };
+  /** retryAfter (seconds) comes with RATE_LIMITED. */
+  | { type: "error"; code: AuditErrorCode; retryAfter?: number };
 
 const stages: readonly AuditStage[] = ["performance", "page"];
 
@@ -38,8 +39,13 @@ export function parseAuditEvent(value: unknown): AuditStreamEvent | null {
       return typeof value.id === "string" && /^[A-Za-z0-9_-]{12,64}$/.test(value.id)
         ? { type: "done", id: value.id, cached: value.cached === true }
         : null;
-    case "error":
-      return { type: "error", code: isAuditErrorCode(value.code) ? value.code : "SERVER_ERROR" };
+    case "error": {
+      const code = isAuditErrorCode(value.code) ? value.code : "SERVER_ERROR";
+      const retryAfter = value.retryAfter;
+      return typeof retryAfter === "number" && Number.isFinite(retryAfter) && retryAfter > 0
+        ? { type: "error", code, retryAfter: Math.ceil(retryAfter) }
+        : { type: "error", code };
+    }
     default:
       return null;
   }

@@ -11,7 +11,7 @@ export type Steps = Record<StepKey, StepStatus>;
 export type AuditRunState =
   | { phase: "idle" }
   | { phase: "running"; steps: Steps }
-  | { phase: "error"; code: AuditErrorCode };
+  | { phase: "error"; code: AuditErrorCode; retryAfter?: number };
 
 export type AuditRequest = { url: string; localChecks?: boolean; rescanOf?: string };
 
@@ -49,7 +49,7 @@ export function useAuditRunner() {
           router.push(`/report/${message.id}`);
           return;
         } else if (message.type === "error") {
-          setState({ phase: "error", code: message.code });
+          setState({ phase: "error", code: message.code, ...(message.retryAfter ? { retryAfter: message.retryAfter } : {}) });
           return;
         }
       }

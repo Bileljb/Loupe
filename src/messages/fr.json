@@ -207,6 +207,7 @@
     "TOO_LARGE": "Cette page est trop volumineuse pour être vérifiée.",
     "UNREACHABLE": "Nous n'avons pas pu joindre ce site. Vérifiez l'adresse et que le site est bien en ligne.",
     "TOO_MANY_REDIRECTS": "Cette adresse renvoie les visiteurs vers trop d'autres adresses. Vérifiez qu'elle mène bien à votre page d'accueil.",
+    "RATE_LIMITED": "Vous avez lancé beaucoup de vérifications dans la dernière heure. Réessayez dans {minutes} min.",
     "SERVER_ERROR": "Un problème est survenu de notre côté. Réessayez dans un instant."
   }
 }

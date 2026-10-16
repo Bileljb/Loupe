@@ -22,6 +22,22 @@ function deps(overrides: Partial<AuditDeps> = {}): Partial<AuditDeps> {
 const rejectWith = (error: unknown) => vi.fn(async () => Promise.reject(error));
 
 describe("runAudit", () => {
+  it("skips the speed test and returns a partial report when the daily budget is spent", async () => {
+    const d = deps();
+    const report = await runAudit({ url: "rosas-bakery.example" }, { deps: d, allowPsi: async () => false });
+    expect(d.runPsi).not.toHaveBeenCalled();
+    expect(report.partial).toEqual({ psiFailed: true });
+    expect(report.scores.performance).toBeNull();
+    expect(report.scores.seo).not.toBeNull();
+  });
+
+  it("runs the speed test when the budget allows it", async () => {
+    const d = deps();
+    const report = await runAudit({ url: "rosas-bakery.example" }, { deps: d, allowPsi: async () => true });
+    expect(d.runPsi).toHaveBeenCalledTimes(1);
+    expect(report.partial).toBeUndefined();
+  });
+
   it("combines both sources into a valid, sorted report", async () => {
     const report = await runAudit({ url: "Rosas-Bakery.example" }, { deps: deps() });
     expect(reportSchema.safeParse(report).success).toBe(true);

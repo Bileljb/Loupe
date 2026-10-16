@@ -6,7 +6,7 @@ import { computeScores, sortIssues } from "@/lib/scoring/score";
 import { FetchError, fetchErrorCodes, type FetchErrorCode } from "@/lib/security/errors";
 import { safeFetch } from "@/lib/security/safeFetch";
 import { validateUrl } from "@/lib/security/ssrf";
-import { fetchPsi } from "./psiClient";
+import { fetchPsi, PsiError } from "./psiClient";
 
 /** Progress events for the streamed API response. Stages run in parallel, so order isn't fixed. */
 export type AuditProgress =
@@ -25,6 +25,8 @@ export type AuditDeps = {
 export type AuditOptions = {
   previousReportId?: string;
   onProgress?: (event: AuditProgress) => void;
+  /** Budget gate for the PSI quota. When it says no, speed is skipped and the report is partial. */
+  allowPsi?: () => Promise<boolean>;
   deps?: Partial<AuditDeps>;
 };
 
@@ -72,6 +74,15 @@ const defaultDeps: AuditDeps = {
 
 function isFetchErrorCode(value: string): value is FetchErrorCode {
   return (fetchErrorCodes as readonly string[]).includes(value);
+}
+
+async function runPsiWithinBudget(
+  url: string,
+  runPsi: AuditDeps["runPsi"],
+  allowPsi: AuditOptions["allowPsi"],
+): Promise<PsiResult> {
+  if (allowPsi && !(await allowPsi())) throw new PsiError("PSI_QUOTA");
+  return runPsi(url);
 }
 
 /** Validates and normalizes request input. Throws FetchError with a translatable code. */
@@ -125,7 +136,7 @@ export async function runAudit(
     );
 
   const [psiOutcome, pageOutcome] = await Promise.allSettled([
-    track("performance", deps.runPsi(url)),
+    track("performance", runPsiWithinBudget(url, deps.runPsi, options.allowPsi)),
     track("page", deps.fetchSnapshot(url).then((snapshot) => runHtmlChecks(snapshot, { localChecks }))),
   ]);
 

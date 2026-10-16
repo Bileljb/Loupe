@@ -207,6 +207,7 @@
     "TOO_LARGE": "This page is too big for us to check.",
     "UNREACHABLE": "We couldn't reach this website. Check the address and make sure the site is online.",
     "TOO_MANY_REDIRECTS": "This address sends visitors through too many other addresses. Check that it leads to your homepage.",
+    "RATE_LIMITED": "You have run a lot of checks in the last hour. Please try again in {minutes} min.",
     "SERVER_ERROR": "Something went wrong on our side. Please try again in a moment."
   }
 }

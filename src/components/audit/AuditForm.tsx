@@ -2,16 +2,14 @@
 
 import { useId, type FormEvent } from "react";
 import { useTranslations } from "next-intl";
-import { CircleX } from "lucide-react";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { AuditErrorAlert } from "./AuditErrorAlert";
 import { AuditProgress } from "./AuditProgress";
 import { useAuditRunner } from "./useAuditRunner";
 
 export function AuditForm() {
   const t = useTranslations("AuditForm");
-  const tErrors = useTranslations("Errors");
   const { state, run } = useAuditRunner();
   const ids = { url: useId(), error: useId(), local: useId(), localHint: useId() };
   const running = state.phase === "running";
@@ -73,11 +71,7 @@ export function AuditForm() {
       </form>
 
       {state.phase === "error" && (
-        <Alert variant="destructive" id={ids.error}>
-          <CircleX aria-hidden="true" />
-          <AlertTitle>{t("errorTitle")}</AlertTitle>
-          <AlertDescription>{tErrors(state.code)}</AlertDescription>
-        </Alert>
+        <AuditErrorAlert id={ids.error} title={t("errorTitle")} code={state.code} retryAfter={state.retryAfter} />
       )}
 
       {state.phase === "running" && <AuditProgress steps={state.steps} />}

@@ -44,6 +44,18 @@ describe("parseAuditEvent", () => {
     expect(parseAuditEvent({ type: "error", code: "<script>" })).toEqual({ type: "error", code: "SERVER_ERROR" });
   });
 
+  it("keeps a sane retry time for rate-limit errors", () => {
+    expect(parseAuditEvent({ type: "error", code: "RATE_LIMITED", retryAfter: 1499.2 })).toEqual({
+      type: "error",
+      code: "RATE_LIMITED",
+      retryAfter: 1500,
+    });
+    expect(parseAuditEvent({ type: "error", code: "RATE_LIMITED", retryAfter: "soon" })).toEqual({
+      type: "error",
+      code: "RATE_LIMITED",
+    });
+  });
+
   it("rejects a report id that isn't one of ours", () => {
     expect(parseAuditEvent({ type: "done", id: "../../admin" })).toBeNull();
     expect(parseAuditEvent({ type: "stage", stage: "secret", status: "done" })).toBeNull();
