@@ -137,6 +137,32 @@
       "evidence": "What we measured",
       "example": "Example code"
     },
+    "rescan": {
+      "button": "Re-scan my site",
+      "running": "Re-scanning...",
+      "hint": "Fixed something? Check again to see your progress.",
+      "errorTitle": "We couldn't re-scan this website"
+    },
+    "compare": {
+      "title": "Since your last check",
+      "since": "Compared with your check on {date}.",
+      "previousLink": "See the previous report",
+      "improved": "Your score improved from {before} to {after}.",
+      "dropped": "Your score went down from {before} to {after}.",
+      "same": "Your score stayed at {score}.",
+      "up": "Up {points}",
+      "down": "Down {points}",
+      "unchanged": "No change",
+      "notCompared": "Not compared",
+      "fixedTitle": "Fixed",
+      "fixedLabel": "Fixed",
+      "fixedIntro": "Nice work! These problems are gone.",
+      "noneFixed": "Nothing has been fixed since last time yet.",
+      "newTitle": "New problems",
+      "newIntro": "These weren't there last time.",
+      "stillOpenTitle": "Still to fix",
+      "stillOpenIntro": "These are still open. You'll find the steps in the list below."
+    },
     "developer": {
       "title": "Send to my developer",
       "intro": "Copy a ready-made to-do list with the technical details your developer or agency needs.",

@@ -9,6 +9,8 @@ export const maxDuration = 90;
 const bodySchema = z.object({
   url: z.string().max(2048),
   localChecks: z.boolean().optional(),
+  // Re-scan of an existing report: fresh audit (no cache), linked for the compare view.
+  rescanOf: z.string().regex(/^[A-Za-z0-9_-]{12,64}$/).optional(),
 });
 
 const headers = {
@@ -31,7 +33,8 @@ export async function POST(request: Request): Promise<Response> {
     async start(controller) {
       const send = (event: AuditStreamEvent) => controller.enqueue(encoder.encode(line(event)));
       try {
-        const { report, cached } = await auditAndSave(parsed.data, { onProgress: send });
+        const { rescanOf, ...input } = parsed.data;
+        const { report, cached } = await auditAndSave(input, { onProgress: send, ...(rescanOf ? { rescanOf } : {}) });
         send({ type: "done", id: report.id, cached });
       } catch (error) {
         if (error instanceof FetchError) {

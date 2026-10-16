@@ -47,6 +47,13 @@ describe("POST /api/audit", () => {
     ]);
   });
 
+  it("passes a re-scan request through", async () => {
+    auditAndSave.mockResolvedValue({ report: { id: "newreport0000001" } as Report, cached: false });
+    await events(await POST(post({ url: "example.com", rescanOf: "oldreport0000001" })));
+    expect(auditAndSave.mock.calls[0]?.[0]).toEqual({ url: "example.com" });
+    expect(auditAndSave.mock.calls[0]?.[1]).toMatchObject({ rescanOf: "oldreport0000001" });
+  });
+
   it("sends the error code of a known failure", async () => {
     auditAndSave.mockRejectedValue(new FetchError("BLOCKED"));
     expect(await events(await POST(post({ url: "localhost" })))).toEqual([{ type: "error", code: "BLOCKED" }]);
@@ -61,7 +68,13 @@ describe("POST /api/audit", () => {
     expect(console.error).not.toHaveBeenCalledWith(expect.anything(), expect.stringContaining("hunter2"));
   });
 
-  it.each([["not json"], [{}], [{ url: 42 }], [{ url: "a".repeat(3000) }]])("rejects a bad body (%#)", async (body) => {
+  it.each([
+    ["not json"],
+    [{}],
+    [{ url: 42 }],
+    [{ url: "a".repeat(3000) }],
+    [{ url: "example.com", rescanOf: "../../report" }],
+  ])("rejects a bad body (%#)", async (body) => {
     const response = await POST(post(body));
     expect(response.status).toBe(400);
     expect(await events(response)).toEqual([{ type: "error", code: "INVALID_URL" }]);

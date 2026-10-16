@@ -353,7 +353,7 @@ Note: `reports.ts` holds all the logic over a tiny `KeyValueStore` (`get`, `set`
 - [x] "Technical view" toggle that expands all developer details (off by default, remembered per viewer)
 - [x] Language switcher (EN / FR / AR) in the header; stays on the same page; works on report pages
 - [x] All UI strings come from `messages/*.json` (no hardcoded text); report content comes from the locale's KB
-- [ ] Full RTL pass: layout, icons, score rings, progress stages, forms, and the compare view in Arabic (all done except the compare view, which arrives in Phase 8)
+- [x] Full RTL pass: layout, icons, score rings, progress stages, forms, and the compare view in Arabic
 - [x] Dark mode, reduced-motion support, mobile-first layout
 - [x] Banners for partial results, JS-rendered sites, and blocked sites
 - [x] Error states: invalid URL, blocked URL, site unreachable/403, PSI quota, timeout
@@ -365,11 +365,13 @@ Note: the stream sends `started`, `stage`, then `done` (report id, `cached`) or 
 
 ## Phase 8: Re-scan and compare
 
-- [ ] "Re-scan" button on the report page; fresh audit bypassing the cache, saved with `previousReportId`
-- [ ] `compareReports(previous, current)`: score deltas per category, issue lists Fixed / New / Still open (by issue id)
-- [ ] Compare view: "Score improved from X to Y", fixed issues celebrated, remaining issues listed
-- [ ] Handle missing/expired previous report gracefully (show the new report without comparison)
-- [ ] Unit tests for `compareReports` with fixtures
+- [x] "Re-scan" button on the report page; fresh audit bypassing the cache, saved with `previousReportId`
+- [x] `compareReports(previous, current)`: score deltas per category, issue lists Fixed / New / Still open (by issue id)
+- [x] Compare view: "Score improved from X to Y", fixed issues celebrated, remaining issues listed
+- [x] Handle missing/expired previous report gracefully (show the new report without comparison)
+- [x] Unit tests for `compareReports` with fixtures
+
+Note: the API takes `rescanOf: <id>`; `auditAndSave` loads that report and re-audits *its* URL and `localChecks` (the request's URL is ignored), so a re-scan can't be linked to another site's report. If the previous report has expired, it's a plain fresh audit with no link. Re-scans skip the cache and aren't written to it. `compareReports` only compares areas checked in both runs (a failed speed test is never "fixed" or "new"); an issue that disappears from a checked area counts as fixed, because PSI only reports failing opportunities. The report page also refuses to compare two different URLs. The landing form and the re-scan button share `useAuditRunner` and `AuditProgress`. The example report has no re-scan button (its site is made up). Verified by re-scanning a doctored copy of a real python.org report in Upstash; no public test site was available to fix for real.
 
 **Done when:** fixing something on a test site and re-scanning shows the improvement and the fixed issue.
 

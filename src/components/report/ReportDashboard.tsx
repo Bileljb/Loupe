@@ -6,14 +6,17 @@ import { Link } from "@/i18n/navigation";
 import { localeNames, type AppLocale } from "@/i18n/routing";
 import { getKbEntry, type KbEntry } from "@/lib/kb";
 import { buildDeveloperMessage } from "@/lib/report/developerMessage";
-import { blockedStatus, platformNames, trustedPlatform, vitalsFrom } from "@/lib/report";
+import { blockedStatus, loadReport, platformNames, trustedPlatform, vitalsFrom } from "@/lib/report";
+import { compareReports } from "@/lib/report/compare";
 import { categorySchema, type Issue, type Report, type Severity } from "@/lib/schemas";
 import { fixFirst, letterGrade } from "@/lib/scoring/score";
 import { siteConfig } from "@/lib/siteConfig";
 import { reportExpiresAt } from "@/lib/storage/reports";
+import { ComparePanel } from "./ComparePanel";
 import { CopyButton } from "./CopyButton";
 import { DeveloperMessage } from "./DeveloperMessage";
 import { IssueCard, issueAnchor } from "./IssueCard";
+import { RescanButton } from "./RescanButton";
 import { ScoreRing } from "./ScoreRing";
 import { SeverityIcon } from "./SeverityBadge";
 import { TechnicalViewToggle } from "./TechnicalViewToggle";
@@ -47,6 +50,7 @@ export async function ReportDashboard({ report, routeId, isExample = false }: Pr
   const blocked = blockedStatus(report.issues);
   const grade = letterGrade(report.scores.overall);
   const host = new URL(report.url).host;
+  const previous = await loadPrevious(report);
 
   return (
     <div className="flex flex-col gap-8">
@@ -60,7 +64,18 @@ export async function ReportDashboard({ report, routeId, isExample = false }: Pr
           <CopyButton label={t("actions.copyLink")} copiedLabel={t("actions.copied")} failedLabel={t("actions.copyFailed")} />
           <TechnicalViewToggle label={t("actions.technicalView")} hint={t("actions.technicalViewHint")} />
         </div>
+        {/* The example's site is made up, so it can't be re-scanned. */}
+        {!isExample && <RescanButton reportId={report.id} url={report.url} localChecks={report.localChecks} />}
       </header>
+
+      {previous && (
+        <ComparePanel
+          comparison={compareReports(previous, report)}
+          previousId={previous.id}
+          previousDate={formatDate(new Date(previous.createdAt))}
+          entry={entry}
+        />
+      )}
 
       {isExample && (
         <Alert>
@@ -277,6 +292,18 @@ async function Banners({ report, blocked, platformName }: { report: Report; bloc
       )}
     </div>
   );
+}
+
+/** The report this one re-scanned. Missing, expired or unreadable: show the new report alone. */
+async function loadPrevious(report: Report): Promise<Report | null> {
+  if (!report.previousReportId) return null;
+  try {
+    const result = await loadReport(report.previousReportId);
+    // Re-scans reuse the previous report's page, but never compare two different pages.
+    return result.status === "found" && result.report.url === report.url ? result.report : null;
+  } catch {
+    return null;
+  }
 }
 
 /** "Send to my developer" text in the current language, plus English for developers. */

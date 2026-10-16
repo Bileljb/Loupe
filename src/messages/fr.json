@@ -137,6 +137,32 @@
       "evidence": "Ce que nous avons mesuré",
       "example": "Exemple de code"
     },
+    "rescan": {
+      "button": "Revérifier mon site",
+      "running": "Nouvelle vérification...",
+      "hint": "Vous avez corrigé quelque chose ? Vérifiez à nouveau pour voir vos progrès.",
+      "errorTitle": "Nous n'avons pas pu revérifier ce site"
+    },
+    "compare": {
+      "title": "Depuis votre dernière vérification",
+      "since": "Comparé à votre vérification du {date}.",
+      "previousLink": "Voir le rapport précédent",
+      "improved": "Votre score est passé de {before} à {after}.",
+      "dropped": "Votre score a baissé de {before} à {after}.",
+      "same": "Votre score reste à {score}.",
+      "up": "+{points}",
+      "down": "−{points}",
+      "unchanged": "Pas de changement",
+      "notCompared": "Non comparé",
+      "fixedTitle": "Corrigé",
+      "fixedLabel": "Corrigé",
+      "fixedIntro": "Bravo ! Ces problèmes ont disparu.",
+      "noneFixed": "Rien n'a encore été corrigé depuis la dernière fois.",
+      "newTitle": "Nouveaux problèmes",
+      "newIntro": "Ils n'étaient pas là la dernière fois.",
+      "stillOpenTitle": "Encore à corriger",
+      "stillOpenIntro": "Ces problèmes sont toujours là. Vous trouverez les étapes dans la liste ci-dessous."
+    },
     "developer": {
       "title": "Envoyer à mon développeur",
       "intro": "Copiez une liste de tâches prête à l'emploi, avec les détails techniques dont votre développeur ou votre agence a besoin.",

@@ -40,20 +40,41 @@ describe("auditAndSave", () => {
     expect(d.runPsi).toHaveBeenCalledTimes(1);
   });
 
-  it("runs a fresh audit when the cache is bypassed (re-scan)", async () => {
+  it("re-scans with a fresh audit linked to the previous report", async () => {
     const storage = memoryStorage();
     const d = deps();
     const first = await auditAndSave({ url: "rosas-bakery.example" }, { storage, deps: d });
-    const rescan = await auditAndSave(
-      { url: "rosas-bakery.example" },
-      { storage, deps: d, bypassCache: true, previousReportId: first.report.id },
-    );
+    const rescan = await auditAndSave({ url: "rosas-bakery.example" }, { storage, deps: d, rescanOf: first.report.id });
     expect(rescan.cached).toBe(false);
     expect(rescan.report.id).not.toBe(first.report.id);
     expect(rescan.report.previousReportId).toBe(first.report.id);
+    expect(d.runPsi).toHaveBeenCalledTimes(2);
+    expect(await storage.getReport(rescan.report.id)).toEqual({ status: "found", report: rescan.report });
     // The re-scan's compare view isn't handed to the next visitor.
     const next = await auditAndSave({ url: "rosas-bakery.example" }, { storage, deps: d });
     expect(next.report.id).toBe(first.report.id);
+  });
+
+  it("re-scans the previous report's page and settings, whatever the request says", async () => {
+    const storage = memoryStorage();
+    const d = deps();
+    const first = await auditAndSave({ url: "rosas-bakery.example", localChecks: true }, { storage, deps: d });
+    const rescan = await auditAndSave(
+      { url: "someone-else.example", localChecks: false },
+      { storage, deps: d, rescanOf: first.report.id },
+    );
+    expect(rescan.report.url).toBe("https://rosas-bakery.example/");
+    expect(rescan.report.localChecks).toBe(true);
+    expect(rescan.report.previousReportId).toBe(first.report.id);
+  });
+
+  it("runs a plain fresh audit when the previous report has expired", async () => {
+    const storage = memoryStorage();
+    const d = deps();
+    await auditAndSave({ url: "rosas-bakery.example" }, { storage, deps: d });
+    const rescan = await auditAndSave({ url: "rosas-bakery.example" }, { storage, deps: d, rescanOf: "expired-report-01" });
+    expect(rescan.cached).toBe(false);
+    expect(rescan.report.previousReportId).toBeUndefined();
   });
 
   it("keeps local-business audits separate from standard ones", async () => {
