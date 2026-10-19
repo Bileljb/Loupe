@@ -50,3 +50,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# private project notes and AI agent files (kept locally, not published)
+CLAUDE.md
+FEATURES.md
+AGENTS.md
