@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "@/i18n/navigation";
+import { useEffect, useRef, useState } from "react";
+import { useLocale } from "next-intl";
+import { getPathname, useRouter } from "@/i18n/navigation";
 import { readAuditEvents, type AuditErrorCode } from "@/lib/audit/events";
 
 export type StepKey = "performance" | "page" | "saving";
@@ -10,17 +11,40 @@ export type Steps = Record<StepKey, StepStatus>;
 
 export type AuditRunState =
   | { phase: "idle" }
-  | { phase: "running"; steps: Steps }
+  /** `opening`: the report is saved and the page is switching to it. */
+  | { phase: "running"; steps: Steps; opening?: boolean }
   | { phase: "error"; code: AuditErrorCode; retryAfter?: number };
 
 export type AuditRequest = { url: string; localChecks?: boolean; rescanOf?: string };
 
 const initialSteps: Steps = { performance: "running", page: "running", saving: "pending" };
 
+// If the in-app navigation hasn't replaced this page by then, load the report the plain way.
+const OPEN_FALLBACK_MS = 6000;
+
 /** Posts to /api/audit, follows the streamed stages, and opens the report when it's ready. */
 export function useAuditRunner() {
   const router = useRouter();
+  const locale = useLocale();
   const [state, setState] = useState<AuditRunState>({ phase: "idle" });
+  const fallback = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // A successful navigation unmounts the caller, which cancels the fallback.
+  useEffect(
+    () => () => {
+      if (fallback.current) clearTimeout(fallback.current);
+    },
+    [],
+  );
+
+  function openReport(id: string) {
+    const href = `/report/${id}`;
+    router.push(href);
+    const target = getPathname({ href, locale });
+    fallback.current = setTimeout(() => {
+      if (window.location.pathname !== target) window.location.assign(target);
+    }, OPEN_FALLBACK_MS);
+  }
 
   async function run(request: AuditRequest) {
     let steps: Steps = { ...initialSteps };
@@ -45,8 +69,9 @@ export function useAuditRunner() {
           setState({
             phase: "running",
             steps: { performance: finish(steps.performance), page: finish(steps.page), saving: "done" },
+            opening: true,
           });
-          router.push(`/report/${message.id}`);
+          openReport(message.id);
           return;
         } else if (message.type === "error") {
           setState({ phase: "error", code: message.code, ...(message.retryAfter ? { retryAfter: message.retryAfter } : {}) });

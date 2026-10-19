@@ -91,6 +91,7 @@
     "localHint": "Adds checks for your address, phone number, opening hours and map.",
     "submit": "Check my website",
     "submitting": "Checking...",
+    "opening": "Opening your report...",
     "progressTitle": "Checking your website",
     "duration": "This usually takes 20 to 60 seconds.",
     "stages": {

@@ -54,7 +54,7 @@ export function AuditForm() {
             {running ? (
               <LoaderCircle aria-hidden="true" className="size-5 motion-safe:animate-spin" />
             ) : null}
-            {running ? t("submitting") : t("submit")}
+            {running ? t(state.phase === "running" && state.opening ? "opening" : "submitting") : t("submit")}
             {running ? null : <ArrowRight aria-hidden="true" className="size-5 rtl:-scale-x-100" />}
           </button>
         </div>

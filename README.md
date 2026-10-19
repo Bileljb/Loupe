@@ -4,7 +4,7 @@
 
 Type in a website address and get a clear report in about 30 seconds: what's wrong, why it matters for the business, how to fix it, and what to do first. No signup, no jargon.
 
-**Live demo:** _coming soon_ · **Example report:** `/en/report/example`
+**Live demo:** [loupe-ashen.vercel.app](https://loupe-ashen.vercel.app) · **Example report:** [see a full report](https://loupe-ashen.vercel.app/en/report/example)
 
 Available in English, French and Arabic (full right-to-left layout).
 

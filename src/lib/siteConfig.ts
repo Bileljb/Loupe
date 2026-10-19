@@ -1,7 +1,10 @@
 // Single source for brand details. Renaming the product is a one-line change here.
 const name = "Loupe";
-// Fallback for local development; production sets NEXT_PUBLIC_SITE_URL.
-const url = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+// NEXT_PUBLIC_SITE_URL wins. On Vercel, fall back to the project's production domain (set
+// automatically, without the scheme), so a missing setting never puts localhost in links.
+const vercelDomain = process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL;
+const url =
+  process.env.NEXT_PUBLIC_SITE_URL || (vercelDomain ? `https://${vercelDomain}` : "http://localhost:3000");
 
 export const siteConfig = {
   name,

@@ -91,6 +91,7 @@
     "localHint": "Ajoute des vérifications pour votre adresse, votre numéro de téléphone, vos horaires et votre carte.",
     "submit": "Vérifier mon site",
     "submitting": "Vérification...",
+    "opening": "Ouverture de votre rapport...",
     "progressTitle": "Vérification de votre site",
     "duration": "Cela prend généralement entre 20 et 60 secondes.",
     "stages": {
