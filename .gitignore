@@ -22,7 +22,14 @@
 
 # misc
 .DS_Store
+Thumbs.db
+desktop.ini
 *.pem
+*.log
+.eslintcache
+
+# editors
+.idea/
 
 # debug
 npm-debug.log*
